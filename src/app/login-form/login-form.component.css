@@ -1,0 +1,55 @@
+#content {
+  height: 200px;
+  position: relative;
+}
+
+#loginForm {
+  margin: 0;
+  position: absolute;
+  top: 10vh;
+  left: 50vw;
+  transform: translate(-50%);
+
+  border: 3px solid #F8F5F0;
+  padding: 20px;
+
+  width: 30vw;
+  height: 30vh;
+}
+
+.field {
+  left: 50%;
+
+  transform: translate(-50%);
+  width: 350px;
+}
+
+#loginButton {
+  color: #F8F5F0;
+  background-color: transparent;
+  border: 2px solid #F8F5F0;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "BankGothic Md BT", fantasy;
+
+  min-width: 130px;
+  height: 50px;
+  margin: 2px 5px 2px 5px;
+
+  transition-property: all;
+  transition-duration: 500ms;
+
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+
+  transform: translate(-50%);
+}
+#loginButton:hover {
+  color: #FFB726;
+  background-color: #F8F5F0;
+  border-color: transparent;
+
+  transition-property: all;
+  transition-duration: 500ms;
+}

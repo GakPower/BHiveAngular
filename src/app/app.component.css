@@ -1,0 +1,111 @@
+::ng-deep :root {
+  --primary: #FFB726;
+  --secondary: #F8F5F0;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--secondary);
+}
+
+#logo {
+  position: fixed;
+  height: 80px;
+  margin-top: 20px;
+}
+#logoText {
+  position: fixed;
+  height: 40px;
+  margin-top: 110px;
+}
+
+#shape {
+  position: relative;
+
+  width: 0;
+  height: 0;
+
+  border-top: 60px solid transparent;
+  border-right: calc(99vw + 3px) solid var(--primary);
+  border-bottom: 100vh solid var(--primary);
+  border-left: 0 solid var(--primary);
+
+  margin-top: 160px;
+}
+
+#bHive {
+  color: var(--secondary);
+  font-size: 2.5em;
+  font-family: "BankGothic Md BT", fantasy;
+}
+#bHive::selection{
+  background-color: var(--primary);
+}
+
+#smallLogo {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+  height: 45px;
+  margin: 10px;
+
+  text-decoration: none;
+  border: 0;
+
+  outline: none;
+}
+#smallLogo:hover {
+  cursor: pointer;
+}
+
+#menuBar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  min-width: calc(100vw - 20px);
+  margin-top: 10px;
+}
+#menuBar [fixed=true] {
+  position: fixed;
+  top: 0;
+}
+
+#menuButtons {
+  position: relative;
+  width: 100vw;
+  margin-right: 30px;
+}
+
+.menuButton {
+  color: var(--secondary);
+  background-color: transparent;
+  border: 2px solid var(--secondary);
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "BankGothic Md BT", fantasy;
+
+  min-width: 130px;
+  height: 50px;
+  margin: 2px 5px 2px 5px;
+
+  transition-property: all;
+  transition-duration: 500ms;
+}
+.menuButton:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+  border-color: transparent;
+
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.menuButton[name="login"] {
+  position: absolute;
+  right: 0;
+}

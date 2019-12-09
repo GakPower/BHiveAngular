@@ -1,0 +1,17 @@
+<div id="content">
+  <div id="loginForm">
+    <mat-form-field class="field" appearance="outline" color="warn">
+      <mat-label>Username</mat-label>
+      <input matInput aria-label="" type="text">
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="text" [(ngModel)]="value">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+        <mat-icon style="margin-top: 10px">close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button id="loginButton">Login</button>
+  </div>
+</div>

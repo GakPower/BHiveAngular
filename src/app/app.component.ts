@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
+window.addEventListener('scroll', f);
+
+function f() {
+  this.fixed = !this.fixed;
+}
 
 @Component({
   selector: 'app-root',
@@ -7,4 +13,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'BHiveProject';
+  public fixed = false;
+
 }
