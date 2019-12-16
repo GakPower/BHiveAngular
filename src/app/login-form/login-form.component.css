@@ -1,8 +1,3 @@
-#content {
-  height: 200px;
-  position: relative;
-}
-
 #loginForm {
   margin: 0;
   position: absolute;
@@ -10,46 +5,122 @@
   left: 50vw;
   transform: translate(-50%);
 
-  border: 3px solid #F8F5F0;
+  text-align: center;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
   padding: 20px;
 
   width: 30vw;
-  height: 30vh;
+  height: 40vh;
+  min-height: 320px;
+  min-width: 400px;
+}
+
+#forms {
+  position: absolute;
+
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .field {
-  left: 50%;
-
-  transform: translate(-50%);
-  width: 350px;
+  width: 20vw;
+  min-width: 300px;
+}
+.field input {
+  margin-bottom: 10px;
+}
+.field button {
+  margin-top: 13px;
+}
+.field mat-icon {
+  vertical-align: middle;
+  color: var(--tertiary);
 }
 
-#loginButton {
-  color: #F8F5F0;
-  background-color: transparent;
-  border: 2px solid #F8F5F0;
-  font-size: 22px;
+#loginTitle {
+  color: var(--secondary);
+  font-size: 2.2em;
   font-weight: bold;
+  font-family: "BankGothic Md BT", fantasy;
+  user-select: none;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #00ff1a !important;
+}
+
+/*//input outline color*/
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--secondary);
+}
+
+/*//mat-input focused color*/
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: var(--secondary) !important;
+  }
+
+/*// mat-input error outline color*/
+   ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+     color: #000aff !important;
+     opacity: 0.8!important;
+   }
+
+/*!/ mat-input carent color*!*/
+   ::ng-deep .mat-input-element {
+     caret-color: var(--secondary) !important;
+     color: var(--tertiary) !important;
+   }
+
+/*!/ mat-input error carent color*!*/
+   ::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+     caret-color: red !important;
+   }
+
+/*!/ mat-label normal state style*!*/
+   ::ng-deep .mat-form-field-label {
+     color: var(--tertiary) !important;
+     opacity: 1;
+     transition-property: all;
+     transition-duration: 300ms;
+   }
+
+/*!/ mat-label focused style*!*/
+/*   ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {*/
+/*     color: var(--tertiary) !important;*/
+/*     opacity: 1;*/
+/*     transition-property: all;*/
+/*     transition-duration: 300ms;*/
+/*   }*/
+
+/*!/ mat-label error style*!*/
+   ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+     color: red!important;
+   }
+
+#loginButton {
+  color: var(--secondary);
+  background: transparent;
+  border: 1px solid var(--secondary);
+  border-radius: 25px;
+  font-size: 22px;
   font-family: "BankGothic Md BT", fantasy;
 
   min-width: 130px;
   height: 50px;
-  margin: 2px 5px 2px 5px;
+  position: absolute;
+  bottom: 20px;
+  transform: translate(-50%);
 
   transition-property: all;
   transition-duration: 500ms;
-
-  position: absolute;
-  left: 50%;
-  bottom: 20px;
-
-  transform: translate(-50%);
 }
 #loginButton:hover {
-  color: #FFB726;
-  background-color: #F8F5F0;
+  color: var(--primary);
   border-color: transparent;
+  background: var(--secondary);
+  border-radius: 25px;
 
   transition-property: all;
-  transition-duration: 500ms;
+  transition-duration: 300ms;
 }

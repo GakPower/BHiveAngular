@@ -1,0 +1,37 @@
+#content {
+  margin: 0;
+  position: absolute;
+  top: 10vh;
+  left: 50vw;
+  transform: translate(-50%);
+
+  text-align: center;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  padding: 20px;
+
+  width: 15vw;
+  height: 20vh;
+  min-height: 150px;
+  min-width: 200px;
+}
+
+#title {
+  color: var(--secondary);
+  user-select: none;
+  font-family: "BankGothic Md BT", fantasy;
+}
+#description {
+  color: var(--tertiary);
+}
+#loginText {
+  color: var(--secondary);
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#loginText:hover {
+  text-decoration-color: var(--secondary);
+  text-decoration: underline;
+}

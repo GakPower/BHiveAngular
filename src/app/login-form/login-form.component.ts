@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../shared/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  public value = '#ff0005';
-  public vr = '#ff0005';
+  public username = '';
+  public password = '';
+  public show = false;
+  public type = 'password';
+  public icon = 'remove_red_eye';
 
-  constructor() { }
+  showHide() {
+    this.show = !this.show;
+    this.type = this.show ? 'text' : 'password';
+    this.icon = this.show ? 'panorama_fish_eye' : 'remove_red_eye';
+  }
+  onSubmit() {
+    this.userService.createUser().then(r => console.log(r));
+    this.userService.boom();
+    console.log(this.username + ' ' + this.password);
+  }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
   }

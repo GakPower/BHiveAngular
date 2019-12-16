@@ -6,11 +6,17 @@ import { MatIconModule, MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { ContactButtonsComponent } from './contact-buttons/contact-buttons.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    ContactButtonsComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,10 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
     MatButtonModule,
     FormsModule,
     MatIconModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
