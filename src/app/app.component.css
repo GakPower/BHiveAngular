@@ -29,7 +29,7 @@
   width: 0;
   height: 0;
 
-  border-top: 60px solid transparent;
+  border-top: 40px solid transparent;
   border-right: calc(99vw + 3px) solid var(--primary);
   border-bottom: 100vh solid var(--primary);
   border-left: 0 solid var(--primary);
@@ -59,9 +59,7 @@
   border: 0;
 
   outline: none;
-}
-#smallLogo:hover {
-  cursor: pointer;
+  user-select: none;
 }
 
 #menuBar {
