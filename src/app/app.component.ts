@@ -1,10 +1,5 @@
 import {Component} from '@angular/core';
 
-window.addEventListener('scroll', f);
-
-function f() {
-  this.fixed = window.pageYOffset > 241;
-}
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -15,9 +10,9 @@ function sleep(ms) {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'BHiveProject';
+  title = 'BHive';
   public fixed = false;
-  public animateContacts = false;
+  animateContacts = false;
 
   async scrollToBottom() {
     scrollTo(0, document.documentElement.clientHeight);
@@ -25,5 +20,10 @@ export class AppComponent {
     this.animateContacts = !this.animateContacts;
     await sleep(700);
     this.animateContacts = !this.animateContacts;
+  }
+  constructor() {
+    setInterval(() => {
+      this.fixed = window.pageYOffset > 220;
+    }, 10);
   }
 }

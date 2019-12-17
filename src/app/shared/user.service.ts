@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './User';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +21,11 @@ export class UserService {
     });
   }
 
-  boom() {
-    // this.aut.auth.createUserWithEmailAndPassword('alanigogoss@gmail.com', '1234567').catch(function(error) {
-    //   // Handle Errors here.
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   console.log(errorCode);
-    //   console.log(errorMessage);
-    //   // ...
-    // });
-    this.aut.auth.sendPasswordResetEmail('alanigogos@gmail.com').catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-      // ...
+  public boom(email) {
+    let one;
+    this.db.database.ref('/users/' + email).once('value').then((snapshot) => {
+      one = snapshot.exists();
     });
+    console.log(one);
   }
 }

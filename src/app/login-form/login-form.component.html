@@ -4,13 +4,20 @@
   <div id="forms">
     <mat-form-field class="field" appearance="outline">
       <mat-label> Email</mat-label>
-      <input matInput aria-label="" type="email" [(ngModel)]="username">
+      <input matInput aria-label="" type="email" [(ngModel)]="email" [formControl]="emailFormControl"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="field" appearance="outline">
       <mat-label> Password</mat-label>
-      <input matInput [type]="type" [(ngModel)]="password">
+      <input matInput [type]="type" [(ngModel)]="password" [formControl]="passwordFormControl"
+             [errorStateMatcher]="matcher" maxlength="25">
       <button mat-button matSuffix mat-icon-button *ngIf="password" (click)="showHide()">
-<!--        <mat-icon>{{icon}}</mat-icon>-->
         <ng-template [ngIf]="!show" [ngIfElse]="hide">
           <svg fill="var(--secondary)" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg"
                aria-hidden="true" focusable="false"
@@ -35,9 +42,12 @@
               d="M16.43,15.93l-1.25-1.25l-1.27-1.27l-3.82-3.82L8.82,8.32L7.57,7.07L6.09,5.59L3.31,2.81L1.89,4.22l2.53,2.53 C2.92,8.02,1.73,9.64,1,11.5C2.73,15.89,7,19,12,19c1.4,0,2.73-0.25,3.98-0.7l4.3,4.3l1.41-1.41l-3.78-3.78L16.43,15.93z M11.86,14.19c-1.38-0.07-2.47-1.17-2.54-2.54L11.86,14.19z M12,17c-3.79,0-7.17-2.13-8.82-5.5c0.64-1.32,1.56-2.44,2.66-3.33 l1.91,1.91C7.6,10.53,7.5,11,7.5,11.5c0,2.48,2.02,4.5,4.5,4.5c0.5,0,0.97-0.1,1.42-0.25l0.95,0.95C13.6,16.88,12.81,17,12,17z"></path>
           </svg>
         </ng-template>
-
       </button>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
+    <a id="forgotPass" routerLink="/forgotPass">Forgot Password?</a>
   </div>
   <button id="loginButton" (click)="onSubmit()">Login</button>
 </div>

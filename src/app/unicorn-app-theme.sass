@@ -14,10 +14,10 @@ $primary: mat-palette($mat-mypalette, 50)
 $secondary:  mat-palette($mat-mypalette, 100)
 
 // The warn palette is optional (defaults to red).
-$tertiary:    mat-palette($mat-mypalette, 200)
+$warn:    mat-palette($mat-red)
 
 // Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat-light-theme($primary, $secondary, $tertiary)
+$candy-app-theme: mat-light-theme($primary, $secondary, $warn)
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
