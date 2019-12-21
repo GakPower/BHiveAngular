@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserService} from "./shared/user.service";
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -13,6 +14,7 @@ export class AppComponent {
   title = 'BHive';
   public fixed = false;
   animateContacts = false;
+  public signedIn;
 
   async scrollToBottom() {
     scrollTo(0, document.documentElement.clientHeight);
@@ -21,9 +23,13 @@ export class AppComponent {
     await sleep(700);
     this.animateContacts = !this.animateContacts;
   }
-  constructor() {
+  constructor(private userService: UserService) {
     setInterval(() => {
       this.fixed = window.pageYOffset > 220;
-    }, 10);
+    }, 1);
+
+    this.userService.isSignedIn().subscribe(isSigned => {
+      this.signedIn = isSigned;
+    })
   }
 }

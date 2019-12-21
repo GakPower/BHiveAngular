@@ -12,15 +12,13 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SuccefulMarkComponent } from './succeful-mark/succeful-mark.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    ContactButtonsComponent,
-    SuccefulMarkComponent
+    ContactButtonsComponent
   ],
   imports: [
     BrowserModule,

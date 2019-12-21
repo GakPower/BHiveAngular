@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {errorObject} from 'rxjs/internal-compatibility';
+import {UserService} from "../shared/user.service";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,11 +26,7 @@ export class LoginFormComponent implements OnInit {
   public type = 'password';
 
   emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required,
+    Validators.email
   ]);
 
   matcher = new MyErrorStateMatcher();
@@ -44,14 +40,17 @@ export class LoginFormComponent implements OnInit {
         this.email = '';
         this.password = '';
         this.emailFormControl.reset();
-        this.passwordFormControl.reset();
-        console.log(this.aut.auth.currentUser.email);
+        this.password = '';
+
+        this.userService.updateSignIn(true);
       }
     );
   }
   constructor(private db: AngularFireDatabase,
-              private aut: AngularFireAuth) { }
+              private aut: AngularFireAuth,
+              private userService: UserService) { }
 
   ngOnInit() {
+
   }
 }

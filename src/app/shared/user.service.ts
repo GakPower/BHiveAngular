@@ -3,6 +3,7 @@ import { User } from './User';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import Swal from 'sweetalert2';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,15 @@ export class UserService {
 
   constructor(private db: AngularFireDatabase,
               private aut: AngularFireAuth) { }
+
+  private signedIn = new Subject();
+
+  isSignedIn() {
+    return this.signedIn;
+  }
+  updateSignIn(signedIn: boolean) {
+    this.signedIn.next(signedIn);
+  }
 
   createUser() {
     return this.db.list('/users/').push({

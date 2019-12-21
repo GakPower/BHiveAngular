@@ -11,8 +11,8 @@
   padding: 20px;
 
   width: 30vw;
-  height: 30vh;
-  min-height: 310px;
+  height: 40vh;
+  min-height: 340px;
   min-width: 400px;
 }
 
@@ -119,6 +119,8 @@
   position: absolute;
   bottom: 20px;
   transform: translate(-50%);
+
+  user-select: none;
 
   transition-property: all;
   transition-duration: 500ms;

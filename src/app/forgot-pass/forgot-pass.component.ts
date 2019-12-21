@@ -25,7 +25,6 @@ export class ForgotPassComponent implements OnInit {
   hint = '';
 
   emailFormControl = new FormControl('', [
-    Validators.required,
     Validators.email,
   ]);
 
@@ -49,7 +48,7 @@ export class ForgotPassComponent implements OnInit {
             'An email has been sent to <strong>' + this.email + '</strong> to reset your password',
             'success'
           ).then(() => {
-            this.email = '';
+            this.emailFormControl.reset();
           });
         });
       }
