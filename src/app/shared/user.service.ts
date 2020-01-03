@@ -23,12 +23,13 @@ export class UserService {
   }
 
   createUser() {
-    return this.db.list('/users/').push({
-      gak : {
-        email : 'babooo',
-        password : 1234
-      }
-    });
+    console.log(this.aut.auth.currentUser.uid);
+    // return this.db.list('/users/').push({
+    //   gak : {
+    //     email : 'babooo',
+    //     password : 1234
+    //   }
+    // });
   }
 
   public boom(email) {

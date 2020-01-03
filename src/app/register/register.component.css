@@ -16,21 +16,21 @@
   min-width: 200px;
 }
 
-#title {
+h1 {
   color: var(--secondary);
   user-select: none;
-  font-family: "BankGothic Md BT", fantasy;
+  font-family: var(--primaryFont);
 }
-#description {
+p {
   color: var(--tertiary);
 }
-#email {
+span {
   color: var(--secondary);
   text-decoration: none;
   user-select: none;
   cursor: pointer;
 }
-#email:hover {
+span:hover {
   text-decoration-color: var(--secondary);
   text-decoration: underline;
 }

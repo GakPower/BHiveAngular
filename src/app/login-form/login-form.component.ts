@@ -1,17 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {UserService} from "../shared/user.service";
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import {UserService} from '../shared/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -24,12 +14,7 @@ export class LoginFormComponent implements OnInit {
   public password = '';
   public show = false;
   public type = 'password';
-
-  emailFormControl = new FormControl('', [
-    Validators.email
-  ]);
-
-  matcher = new MyErrorStateMatcher();
+  public signedIn;
 
   showHide() {
     this.show = !this.show;
@@ -39,16 +24,20 @@ export class LoginFormComponent implements OnInit {
     this.aut.auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
         this.email = '';
         this.password = '';
-        this.emailFormControl.reset();
-        this.password = '';
 
         this.userService.updateSignIn(true);
+
+        console.log(this.aut.auth.currentUser.uid);
       }
     );
   }
   constructor(private db: AngularFireDatabase,
               private aut: AngularFireAuth,
-              private userService: UserService) { }
+              private userService: UserService) {
+    this.userService.isSignedIn().subscribe(isSigned => {
+      this.signedIn = isSigned;
+    });
+  }
 
   ngOnInit() {
 

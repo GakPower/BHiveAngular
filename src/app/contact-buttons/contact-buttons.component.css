@@ -6,6 +6,7 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
+  --animationDuration: 500ms;
 }
 
 ul li {
@@ -27,7 +28,7 @@ ul li a {
 }
 ul li a span {
   position: absolute;
-  transition: transform .5s;
+  transition: transform var(--animationDuration);
 }
 ul li a span:nth-child(1),
 ul li a span:nth-child(3) {
@@ -43,7 +44,7 @@ ul li a span:nth-child(1) {
 ul li a:hover span:nth-child(1) {
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform .5s;
+  transition: transform var(--animationDuration);
 }
 
 
@@ -55,7 +56,7 @@ ul li a span:nth-child(3) {
 ul li a:hover span:nth-child(3) {
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform .5s;
+  transition: transform var(--animationDuration);
 }
 
 
@@ -74,7 +75,7 @@ ul li a span:nth-child(2) {
 ul li a:hover span:nth-child(2) {
   transform: scale(1);
   transform-origin: top;
-  transition: transform .5s;
+  transition: transform var(--animationDuration);
 }
 
 ul li a span:nth-child(4) {
@@ -86,26 +87,29 @@ ul li a span:nth-child(4) {
 ul li a:hover span:nth-child(4) {
   transform: scaleY(1);
   transform-origin: bottom;
-  transition: transform .5s;
+  transition: transform var(--animationDuration);
+}
+
+/*
+  Classes for custom animation
+*/
+.one, .two, .three, .four {
+  transition: transform var(--animationDuration);
 }
 
 .one {
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform .5s;
 }
 .two {
-  transform: scale(1);
+  transform: scaleY(1);
   transform-origin: top;
-  transition: transform .5s;
 }
 .three {
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform .5s;
 }
 .four {
   transform: scaleY(1);
   transform-origin: bottom;
-  transition: transform .5s;
 }

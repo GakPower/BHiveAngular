@@ -1,27 +1,21 @@
-<div id="loginForm" (submit)="onSubmit()">
-  <h1 id="loginTitle">Login</h1>
+<div id="loginForm" (submit)="onSubmit()" *ngIf="!signedIn">
+  <h1>Login</h1>
 
   <div id="forms">
-    <mat-form-field class="field" appearance="outline">
+    <mat-form-field appearance="outline">
       <mat-label> Email</mat-label>
-      <input matInput aria-label="" type="email" [(ngModel)]="email" [formControl]="emailFormControl"
-             [errorStateMatcher]="matcher" (keyup.enter)="onSubmit()">
-      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
+      <input matInput aria-label="" type="email" [(ngModel)]="email" (keyup.enter)="onSubmit()">
     </mat-form-field>
-    <mat-form-field class="field" appearance="outline">
+
+    <mat-form-field appearance="outline">
       <mat-label> Password</mat-label>
       <input matInput [type]="type" [(ngModel)]="password"  maxlength="25" (keyup.enter)="onSubmit()">
       <button mat-button matSuffix mat-icon-button *ngIf="password" (click)="showHide()">
-        <mat-icon *ngIf="show">visibility_off</mat-icon>
-        <mat-icon *ngIf="!show">visibility_on</mat-icon>
+        <mat-icon *ngIf="show">visibility_on</mat-icon>
+        <mat-icon *ngIf="!show">visibility_off</mat-icon>
       </button>
     </mat-form-field>
-    <a id="forgotPass" routerLink="/forgotPass">Forgot Password?</a>
+    <a routerLink="/forgotPass">Forgot Password?</a>
   </div>
-  <button type="submit" id="loginButton" (click)="onSubmit()">Login</button>
+  <button (click)="onSubmit()">Login</button>
 </div>

@@ -13,6 +13,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AngularFireAuthModule,
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

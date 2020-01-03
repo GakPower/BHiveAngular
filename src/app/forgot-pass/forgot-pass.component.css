@@ -1,3 +1,140 @@
+/*#forgotPassForm {*/
+/*  margin: 0;*/
+/*  position: absolute;*/
+/*  top: 10vh;*/
+/*  left: 50vw;*/
+/*  transform: translate(-50%);*/
+
+/*  text-align: center;*/
+/*  border: 1px solid var(--secondary);*/
+/*  border-radius: 10px;*/
+/*  padding: 20px;*/
+
+/*  width: 30vw;*/
+/*  height: 40vh;*/
+/*  min-height: 340px;*/
+/*  min-width: 400px;*/
+/*}*/
+
+/*#forms {*/
+/*  position: absolute;*/
+
+/*  left: 50%;*/
+/*  transform: translate(-50%);*/
+/*}*/
+
+/*.field {*/
+/*  width: 20vw;*/
+/*  min-width: 300px;*/
+/*}*/
+/*.field input {*/
+/*  margin-bottom: 10px;*/
+/*}*/
+/*.field button {*/
+/*  margin-top: 13px;*/
+/*}*/
+/*.field mat-icon {*/
+/*  vertical-align: middle;*/
+/*  color: var(--tertiary);*/
+/*}*/
+
+/*#forgotPassTitle {*/
+/*  color: var(--secondary);*/
+/*  font-size: 2.2em;*/
+/*  font-weight: bold;*/
+/*  font-family: "BankGothic Md BT", fantasy;*/
+/*  user-select: none;*/
+/*}*/
+
+p {
+  color: var(--tertiary);
+}
+
+span {
+  color: var(--secondary);
+}
+
+/*::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {*/
+/*  background-color: #00ff1a !important;*/
+/*}*/
+
+/*!/input outline color*!*/
+/*::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {*/
+/*  color: var(--secondary);*/
+/*}*/
+
+/*!/mat-input focused color*!*/
+/*::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {*/
+/*  color: var(--secondary) !important;*/
+/*}*/
+
+/*!/ mat-input error outline color*!*/
+/*::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{*/
+/*  color: red !important;*/
+/*  opacity: 0.8!important;*/
+/*}*/
+
+/*!*!/ mat-input carent color*!*!*/
+/*::ng-deep .mat-input-element {*/
+/*  caret-color: var(--secondary) !important;*/
+/*  color: var(--tertiary) !important;*/
+/*}*/
+
+/*!*!/ mat-input error carent color*!*!*/
+/*::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {*/
+/*  caret-color: red !important;*/
+/*}*/
+
+/*!*!/ mat-label normal state style*!*!*/
+/*::ng-deep .mat-form-field-label {*/
+/*  color: var(--tertiary) !important;*/
+/*  opacity: 1;*/
+/*  transition-property: all;*/
+/*  transition-duration: 300ms;*/
+/*}*/
+
+/*!*!/ mat-label focused style*!*!*/
+/*!*   ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {*!*/
+/*!*     color: var(--tertiary) !important;*!*/
+/*!*     opacity: 1;*!*/
+/*!*     transition-property: all;*!*/
+/*!*     transition-duration: 300ms;*!*/
+/*!*   }*!*/
+
+/*!*!/ mat-label error style*!*!*/
+/*::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {*/
+/*  color: red!important;*/
+/*}*/
+
+/*#forgotPassButton {*/
+/*  color: var(--secondary);*/
+/*  background: transparent;*/
+/*  border: 1px solid var(--secondary);*/
+/*  border-radius: 25px;*/
+/*  font-size: 22px;*/
+/*  font-family: "BankGothic Md BT", fantasy;*/
+
+/*  min-width: 160px;*/
+/*  height: 50px;*/
+/*  position: absolute;*/
+/*  bottom: 20px;*/
+/*  transform: translate(-50%);*/
+
+/*  user-select: none;*/
+
+/*  transition-property: all;*/
+/*  transition-duration: 500ms;*/
+/*}*/
+/*#forgotPassButton:hover {*/
+/*  color: var(--primary);*/
+/*  border-color: transparent;*/
+/*  background: var(--secondary);*/
+/*  border-radius: 25px;*/
+
+/*  transition-property: all;*/
+/*  transition-duration: 300ms;*/
+/*}*/
+
 #forgotPassForm {
   margin: 0;
   position: absolute;
@@ -8,10 +145,9 @@
   text-align: center;
   border: 1px solid var(--secondary);
   border-radius: 10px;
-  padding: 20px;
 
   width: 30vw;
-  height: 40vh;
+  height: 55vh;
   min-height: 340px;
   min-width: 400px;
 }
@@ -23,39 +159,26 @@
   transform: translate(-50%);
 }
 
-.field {
+#forms mat-form-field {
   width: 20vw;
   min-width: 300px;
 }
-.field input {
-  margin-bottom: 10px;
+#forms mat-form-field input {
+  min-height: 30px;
 }
-.field button {
+#forms mat-form-field button {
   margin-top: 13px;
 }
-.field mat-icon {
+#forms mat-form-field mat-icon {
   vertical-align: middle;
   color: var(--tertiary);
 }
 
-#forgotPassTitle {
+h1 {
   color: var(--secondary);
-  font-size: 2.2em;
-  font-weight: bold;
-  font-family: "BankGothic Md BT", fantasy;
+  font-size: 2em;
+  font-family: var(--primaryFont);
   user-select: none;
-}
-
-#forgotPassDesc {
-  color: var(--tertiary);
-}
-
-#resetPass {
-  color: var(--secondary);
-}
-
-::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-  background-color: #00ff1a !important;
 }
 
 /*//input outline color*/
@@ -103,34 +226,52 @@
 
 /*!/ mat-label error style*!*/
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-  color: red!important;
+  color: red !important;
 }
 
-#forgotPassButton {
+#forgotPassForm > button {
   color: var(--secondary);
   background: transparent;
   border: 1px solid var(--secondary);
   border-radius: 25px;
-  font-size: 22px;
-  font-family: "BankGothic Md BT", fantasy;
+  font-size: 1.1rem;
+  font-family: var(--secondaryFont);
 
-  min-width: 160px;
-  height: 50px;
+  min-width: 100px;
+  height: 40px;
   position: absolute;
   bottom: 20px;
   transform: translate(-50%);
 
   user-select: none;
+  caret-color: var(--primary);
 
   transition-property: all;
   transition-duration: 500ms;
 }
-#forgotPassButton:hover {
+#forgotPassForm > button:hover,
+#forgotPassForm > button:focus {
+  caret-color: transparent;
   color: var(--primary);
   border-color: transparent;
   background: var(--secondary);
   border-radius: 25px;
+}
 
-  transition-property: all;
-  transition-duration: 300ms;
+a {
+  color: var(--secondary);
+  user-select: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  outline: none;
+  text-decoration: none;
+  font-family: var(--secondaryFont);
+}
+a:hover,
+a:focus {
+  caret-color: transparent;
+  cursor: pointer;
+  text-decoration: underline var(--secondary);
 }

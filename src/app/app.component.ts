@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from "./shared/user.service";
+import { UserService } from './shared/user.service';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -25,11 +25,11 @@ export class AppComponent {
   }
   constructor(private userService: UserService) {
     setInterval(() => {
-      this.fixed = window.pageYOffset > 220;
+      this.fixed = window.pageYOffset > 198;
     }, 1);
 
     this.userService.isSignedIn().subscribe(isSigned => {
       this.signedIn = isSigned;
-    })
+    });
   }
 }

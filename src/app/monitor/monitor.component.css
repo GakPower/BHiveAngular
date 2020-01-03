@@ -1,14 +1,17 @@
-#content {
-  margin: 0;
+.container {
   position: absolute;
+  margin: 0;
+  padding: 20px;
+  transform: translate(-50%);
+  text-align: center;
+}
+
+#notSignedInMessage {
   top: 10vh;
   left: 50vw;
-  transform: translate(-50%);
 
-  text-align: center;
   border: 1px solid var(--secondary);
   border-radius: 10px;
-  padding: 20px;
 
   width: 15vw;
   height: 20vh;
@@ -16,22 +19,122 @@
   min-width: 200px;
 }
 
-#title {
+h1 {
   color: var(--secondary);
   user-select: none;
-  font-family: "BankGothic Md BT", fantasy;
+  font-family: var(--primaryFont);
 }
-#description {
+
+p {
   color: var(--tertiary);
 }
-#loginText {
+a {
   color: var(--secondary);
   text-decoration: none;
   user-select: none;
   cursor: pointer;
   margin-top: 10px;
+
+  outline: none;
 }
-#loginText:hover {
+a:hover,
+a:focus {
   text-decoration-color: var(--secondary);
   text-decoration: underline;
+  caret-color: var(--primary);
+}
+
+#selectRec {
+  top: 10vh;
+  left: 50vw;
+
+  width: 30vw;
+  min-width: 200px;
+
+  text-align: start;
+}
+#liveData {
+  top: 30vh;
+  left: 20vw;
+
+  width: 30vw;
+  color: var(--secondary);
+  border-radius: 10px;
+  border: 1px solid var(--secondary);
+}
+
+.dataGroup {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+.dataGroup div {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.dataGroup div svg {
+  fill: var(--secondary);
+  width: 26px;
+  min-width: 26px;
+  height: auto;
+
+  padding: 10px;
+}
+.dataGroup div:first-child svg {
+  padding-left: 0;
+}
+.dataGroup div span {
+  font-size: 24px;
+  font-family: var(--secondaryFont);
+}
+.dataGroup div span:last-child {
+  font-size: 14px;
+}
+
+.dataGroup div div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+::ng-deep .mat-form-field-label {
+  color: var(--tertiary) !important;
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--secondary);
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: var(--secondary) !important;
+  opacity: .7;
+}
+
+::ng-deep .mat-form-field-ripple {
+  background-color: var(--secondary) !important;
+  opacity: 1;
+}
+
+::ng-deep .mat-select-arrow {
+  color: var(--tertiary) !important;
+}
+
+:host ::ng-deep .mat-select-value-text {
+  color: var(--tertiary) !important;
+}
+
+::ng-deep .mat-select-panel {
+  background-color: var(--secondary) !important;
+}
+
+::ng-deep .mat-option {
+  color: var(--primary) !important;
+}
+::ng-deep .mat-option.mat-selected {
+  filter: brightness(85%);
 }
