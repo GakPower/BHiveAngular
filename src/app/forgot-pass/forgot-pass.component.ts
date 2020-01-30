@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../shared/user.service';
-import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Swal from 'sweetalert2';
 import {ErrorStateMatcher} from '@angular/material';
@@ -30,8 +28,7 @@ export class ForgotPassComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private db: AngularFireDatabase,
-              private aut: AngularFireAuth) {}
+  constructor(private aut: AngularFireAuth) {}
 
   ngOnInit() {
   }

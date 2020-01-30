@@ -12,7 +12,7 @@
       </div>
       <div id="menuButtons">
         <button>Home</button>
-        <button routerLink="/monitor" *ngIf="!signedIn">Monitor</button>
+        <button routerLink="/monitor" *ngIf="signedIn">Monitor</button>
         <button routerLink="/stats" *ngIf="signedIn">Statistics</button>
         <button (click)="scrollToBottom()">Contact us</button>
         <div class="menuButtonGroup" *ngIf="!signedIn">

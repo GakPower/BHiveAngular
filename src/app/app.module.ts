@@ -11,12 +11,13 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatTabsModule} from "@angular/material/tabs";
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule,

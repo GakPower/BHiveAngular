@@ -1,24 +1,3 @@
-.container {
-  position: absolute;
-  margin: 0;
-  padding: 20px;
-  transform: translate(-50%);
-  text-align: center;
-}
-
-#notSignedInMessage {
-  top: 10vh;
-  left: 50vw;
-
-  border: 1px solid var(--secondary);
-  border-radius: 10px;
-
-  width: 15vw;
-  height: 20vh;
-  min-height: 150px;
-  min-width: 200px;
-}
-
 h1 {
   color: var(--secondary);
   user-select: none;
@@ -44,59 +23,159 @@ a:focus {
   caret-color: var(--primary);
 }
 
+.container {
+  position: absolute;
+  margin: 0;
+  transform: translate(-50%);
+  text-align: center;
+}
+
+#notSignedInMessage {
+  top: 10vh;
+  left: 50vw;
+
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+
+  width: 15vw;
+  height: 20vh;
+  min-height: 150px;
+  min-width: 200px;
+}
 #selectRec {
   top: 10vh;
   left: 50vw;
+
+  display: flex;
 
   width: 30vw;
   min-width: 200px;
 
   text-align: start;
 }
-#liveData {
-  top: 30vh;
-  left: 20vw;
-
+#selectRec mat-form-field {
   width: 30vw;
+  min-width: 200px;
+}
+#selectRec button {
+  min-width: 40px;
+  background-color: var(--primary) !important;
+  display: flex;
+  align-items: center;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  border-radius: 25px;
+  height: 40px;
+  margin-left: 10px;
+
+  transform: translateY(38%);
+  transition: background-color 500ms, transform 500ms;
+}
+#selectRec button:hover {
+  background-color: var(--secondary) !important;
+  transform: translateY(38%) rotate(180deg);
+}
+#selectRec button .mat-icon {
+  color: var(--secondary);
+  font-size: 1.2rem;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin-left: 2px;
+
+  transition: color 500ms;
+}
+#selectRec button:hover .mat-icon {
+  color: var(--primary);
+}
+#selectRec button:active .mat-icon {
+  margin-left: 2px;
+}
+
+#liveData {
+  height: 40vh;
+  width: 40vw;
   color: var(--secondary);
   border-radius: 10px;
   border: 1px solid var(--secondary);
+}
+#monitorData {
+  top: 20vh;
+  left: 50vw;
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#lineChartContainer {
+  position: relative;
+  height: 70vh;
+  width: 64vw;
+  margin-left: 1vw;
+  padding-right: 5px;
+
+  border: 1px var(--secondary) solid;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 700px) {
+  #liveData {
+    height: 30vh;
+    width: 80vw;
+  }
+  #monitorData {
+    flex-direction: column;
+  }
+  #lineChartContainer {
+    width: 90vw !important;
+    height: 45vh !important;
+    margin-left: 0;
+    margin-top: 10px;
+    padding-right: 0;
+  }
+
+  .dataGroup div svg {
+    width: calc(5px + 1.8vh + 1.8vw) !important;
+    min-width: calc(5px + 1.8vh + 1.8vw) !important;
+  }
+  .dataGroup div span {
+    font-size: calc(5px + 1.8vh + 1.8vw) !important;
+  }
+  .dataGroup div span:last-child {
+    font-size: calc(5px + .9vh + .9vw) !important;
+  }
 }
 
 .dataGroup {
   display: flex;
   flex-direction: row;
-  padding: 5px;
+  height: 25%;
 }
 .dataGroup div {
-  width: 50%;
+  height: 100%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
+
 .dataGroup div svg {
   fill: var(--secondary);
-  width: 26px;
-  min-width: 26px;
-  height: auto;
-
-  padding: 10px;
-}
-.dataGroup div:first-child svg {
-  padding-left: 0;
+  width: calc(5px + 1.2vh + 1.2vw);
+  min-width: calc(5px + 1.2vh + 1.2vw);
+  margin-left: 5px;
 }
 .dataGroup div span {
-  font-size: 24px;
+  font-size: calc(5px + 1.2vh + 1.2vw);
   font-family: var(--secondaryFont);
 }
 .dataGroup div span:last-child {
-  font-size: 14px;
+  font-size: calc(5px + .6vh + .6vw);
 }
 
 .dataGroup div div {
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
 }
 
 ::ng-deep .mat-form-field-label {
