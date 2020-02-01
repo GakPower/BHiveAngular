@@ -4,7 +4,8 @@
   <div id="forms">
     <mat-form-field appearance="outline">
       <mat-label> Email</mat-label>
-      <input matInput aria-label="" type="email" [formControl]="emailForm" (keyup.enter)="onSubmit()" appAutoFocus="50">
+      <input matInput aria-label="" type="email" [formControl]="emailForm"
+             (keyup.enter)="onSubmit()" appAutoFocus="50">
 
       <mat-error *ngIf="emailForm.hasError('empty') ||
         emailForm.hasError('notEmail')">{{emailErrorText}}</mat-error>

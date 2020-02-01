@@ -36,6 +36,10 @@ span {
 }
 #forms mat-form-field input {
   min-height: 30px;
+  user-select: text;
+}
+#forms mat-form-field input::selection {
+  background-color: var(--secondaryHighlight);
 }
 #forms mat-form-field button {
   margin-top: 13px;
@@ -92,6 +96,30 @@ h1 {
   color: red !important;
 }
 
+#forgotPassForm > button:first-child {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  padding: 0;
+
+  min-width: 40px;
+  height: 40px;
+
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+
 #forgotPassForm > button {
   color: var(--secondary);
   background: transparent;
@@ -113,14 +141,10 @@ h1 {
   transition-property: all;
   transition-duration: 500ms;
 }
-/*#forgotPassForm > button:hover,*/
-/*#forgotPassForm > button:focus {*/
-/*  caret-color: transparent;*/
-/*  color: var(--primary);*/
-/*  border-color: transparent;*/
-/*  background: var(--secondary);*/
-/*  border-radius: 25px;*/
-/*}*/
+#forgotPassForm > button:hover,
+#forgotPassForm > button:focus {
+  background: var(--secondaryHover);
+}
 
 a {
   color: var(--secondary);

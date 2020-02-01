@@ -1,14 +1,12 @@
 ::ng-deep :root {
-  /*--primary: #FFB726;*/
-  /*--secondary: #F8F5F0;*/
-  /*--primary: #3A3637;*/
-  /*--secondary: #FCB43A;*/
   --primary: #362F27;
   --primaryHover: rgba(54, 47, 39, 0.25);
   --secondary: #FFAC1D;
   --secondaryHover: rgba(255, 172, 29, 0.1);
   --secondaryRipple: rgba(255, 172, 29, 0.25);
+  --secondaryHighlight: rgba(255, 172, 29, 0.45);
   --tertiary: #F8F5F0;
+  --tertiaryHighlight: rgba(248, 245, 240, 0.25);
 
   --primaryFont: 'Viga', sans-serif;
   --secondaryFont: 'Josefin Sans', sans-serif;
@@ -33,6 +31,10 @@ header p {
 
 #shape {
   position: relative;
+  margin-top: 160px;
+
+  display: flex;
+  flex-direction: column;
 
   width: 0;
   height: 100%;
@@ -41,11 +43,6 @@ header p {
   border-right: calc(100vw - 17px) solid var(--primary);
   border-bottom: 100vh solid var(--primary);
   border-left: 0 solid var(--primary);
-
-  margin-top: 160px;
-
-  display: flex;
-  flex-direction: column;
 }
 
 #smallLogo {
@@ -75,13 +72,12 @@ header p {
 }
 
 #menuBar {
+  top: 0;
+
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: row;
 
   width: calc(98vw - 15px);
-  top: 0;
   z-index: 2;
 
   background-color: var(--primary);
@@ -89,8 +85,6 @@ header p {
 
 #menuButtons {
   position: relative;
-  flex-wrap: nowrap;
-  flex-direction: row;
   width: inherit;
   z-index: 2;
 
@@ -98,20 +92,21 @@ header p {
 }
 
 #menuButtons button {
-  color: var(--secondary);
-  background: transparent;
-  border: 0;
-  font-size: 1rem;
-  font-family: var(--secondaryFont);
-  cursor: pointer;
-  caret-color: transparent;
+  position: relative;
+  margin-top: 5px;
 
   height: 35px;
   min-width: 80px;
   line-height: 35px;
 
-  margin-top: 5px;
-  position: relative;
+  color: var(--secondary);
+  font-size: 1rem;
+  font-family: var(--secondaryFont);
+  background: transparent;
+  border: 0;
+
+  cursor: pointer;
+  caret-color: transparent;
 
   transition: all 500ms;
 }
@@ -127,6 +122,7 @@ header p {
   width: 0;
 
   background: var(--secondary);
+
   transition: width 300ms ease, left 300ms ease;
 }
 #menuButtons > button:hover::after,
@@ -138,47 +134,46 @@ header p {
   position: absolute;
   right: 0;
   top: 0;
+
+  display: flex;
+
   min-width: 80px;
   height: 35px;
-  display: flex;
 }
 
 #menuButtons .menuButtonGroup button:first-child {
   margin-right: 10px;
+  border: 1px solid var(--secondaryHighlight);
 }
 #menuButtons .menuButtonGroup button {
   color: var(--secondary);
   background-color: var(--primary);
-  /*border: 1px solid var(--secondary);*/
   border-radius: 25px;
 }
-/*#menuButtons .menuButtonGroup button:hover,*/
-/*#menuButtons .menuButtonGroup button:focus {*/
-/*  color: var(--primary);*/
-/*  background: var(--secondary);*/
-/*}*/
+#menuButtons .menuButtonGroup button:hover,
+#menuButtons .menuButtonGroup button:focus {
+  background: var(--secondaryHover);
+}
 
 #signedInGroup button {
-  min-width: 35px;
-  background-color: var(--primary) !important;
   display: flex;
   align-items: center;
+
+  min-width: 35px;
+  background-color: var(--primary);
 }
-/*#signedInGroup button:hover,*/
-/*#signedInGroup button:focus {*/
-/*  background-color: var(--secondary) !important;*/
-/*}*/
+#signedInGroup button:hover,
+#signedInGroup button:focus {
+  background-color: var(--secondaryHover);
+}
 #signedInGroup button .mat-icon {
-  color: var(--secondary);
-  font-size: 1rem;
   width: 15px;
   height: 15px;
   line-height: 15px;
   margin-left: 1px;
 
+  color: var(--secondary);
+  font-size: 1rem;
+
   transition: color 500ms;
 }
-/*#signedInGroup button:hover .mat-icon,*/
-/*#signedInGroup button:focus .mat-icon {*/
-/*  color: var(--primary);*/
-/*}*/

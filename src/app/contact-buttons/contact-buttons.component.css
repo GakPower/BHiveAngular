@@ -8,7 +8,6 @@ ul {
   display: flex;
   --animationDuration: 500ms;
 }
-
 ul li {
   list-style: none;
 }

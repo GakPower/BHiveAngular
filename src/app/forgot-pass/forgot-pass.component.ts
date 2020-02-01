@@ -24,7 +24,7 @@ export class ForgotPassComponent implements OnInit {
   emailErrorText = '';
 
   constructor(private aut: AngularFireAuth,
-              private router: Router,
+              public router: Router,
               private userService: UserService) {
     if (aut.auth.currentUser != null) {
       this.router.navigate(['/monitor']);
@@ -52,10 +52,11 @@ export class ForgotPassComponent implements OnInit {
           this.aut.auth.sendPasswordResetEmail(email).then(() => {
             Swal.fire(
               'Done!',
-              'An email has been sent to <strong>${email}</strong> to reset your password',
+              'An email has been sent to <strong>' + email + '</strong> to reset your password',
               'success'
             ).then(() => {
               this.emailForm.reset();
+              this.router.navigate(['/login']);
             });
           });
         }

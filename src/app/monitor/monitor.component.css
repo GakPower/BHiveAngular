@@ -3,45 +3,22 @@ h1 {
   user-select: none;
   font-family: var(--primaryFont);
 }
+mat-divider {
+  width: 0;
+  height: 50%;
+  align-self: center;
 
-p {
-  color: var(--tertiary);
-}
-a {
-  color: var(--secondary);
-  text-decoration: none;
-  user-select: none;
-  cursor: pointer;
-  margin-top: 10px;
-
-  outline: none;
-}
-a:hover,
-a:focus {
-  text-decoration-color: var(--secondary);
-  text-decoration: underline;
-  caret-color: var(--primary);
+  background-color: var(--secondary);
 }
 
 .container {
   position: absolute;
   margin: 0;
   transform: translate(-50%);
+
   text-align: center;
 }
 
-#notSignedInMessage {
-  top: 10vh;
-  left: 50vw;
-
-  border: 1px solid var(--secondary);
-  border-radius: 10px;
-
-  width: 15vw;
-  height: 20vh;
-  min-height: 150px;
-  min-width: 200px;
-}
 #selectRec {
   top: 10vh;
   left: 50vw;
@@ -58,46 +35,47 @@ a:focus {
   min-width: 200px;
 }
 #selectRec button {
-  min-width: 40px;
-  background-color: var(--primary) !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--secondary);
-  border: 0;
-  border-radius: 25px;
-  height: 40px;
   margin-left: 10px;
   padding: 0;
+
+  min-width: 40px;
+  height: 40px;
+
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 25px;
+
   cursor: pointer;
 
   transform: translateY(38%);
-  transition: transform 500ms;
+  transition: background-color 300ms;
 }
-#selectRec button:hover .mat-icon {
-  /*background-color: var(--secondary) !important;*/
-  transform: rotate(360deg);
+#selectRec button:hover {
+  background-color: var(--secondaryHover);
 }
 #selectRec button .mat-icon {
-  color: var(--secondary);
-  font-size: 1.2rem;
   width: 20px;
   height: 20px;
   line-height: 20px;
   margin-left: 2px;
 
+  color: var(--secondary);
+  font-size: 1.2rem;
+
   transition: transform 500ms;
 }
-/*#selectRec button:hover .mat-icon {*/
-/*  color: var(--primary);*/
-/*}*/
-#selectRec button .mat-icon {
-  margin-left: 2px;
+#selectRec button:hover .mat-icon {
+  transform: rotate(360deg);
 }
 
 #liveData {
   height: 40vh;
   width: 40vw;
+
   color: var(--secondary);
   border-radius: 10px;
   border: 1px solid var(--secondary);
@@ -105,21 +83,57 @@ a:focus {
 #monitorData {
   top: 20vh;
   left: 50vw;
-  width: 95vw;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 95vw;
 }
 #lineChartContainer {
   position: relative;
-  height: 70vh;
-  width: 64vw;
   margin-left: 1vw;
   padding-right: 5px;
+
+  height: 70vh;
+  width: 64vw;
 
   border: 1px var(--secondary) solid;
   border-radius: 10px;
 }
+
+.dataGroup {
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+}
+.dataGroup div {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.dataGroup div svg {
+  width: calc(5px + 1.2vh + 1.2vw);
+  min-width: calc(5px + 1.2vh + 1.2vw);
+  margin-left: 5px;
+
+  fill: var(--secondary);
+}
+.dataGroup div span {
+  font-size: calc(5px + 1.2vh + 1.2vw);
+  font-family: var(--secondaryFont);
+}
+.dataGroup div span:last-child {
+  font-size: calc(5px + .6vh + .6vw);
+}
+.dataGroup div div {
+  display: flex;
+  flex-direction: column;
+}
+
 @media only screen and (max-width: 700px) {
   #liveData {
     height: 30vh;
@@ -148,39 +162,6 @@ a:focus {
   }
 }
 
-.dataGroup {
-  display: flex;
-  flex-direction: row;
-  height: 25%;
-}
-.dataGroup div {
-  height: 100%;
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.dataGroup div svg {
-  fill: var(--secondary);
-  width: calc(5px + 1.2vh + 1.2vw);
-  min-width: calc(5px + 1.2vh + 1.2vw);
-  margin-left: 5px;
-}
-.dataGroup div span {
-  font-size: calc(5px + 1.2vh + 1.2vw);
-  font-family: var(--secondaryFont);
-}
-.dataGroup div span:last-child {
-  font-size: calc(5px + .6vh + .6vw);
-}
-
-.dataGroup div div {
-  display: flex;
-  flex-direction: column;
-}
-
 ::ng-deep .mat-form-field-label {
   color: var(--tertiary) !important;
   opacity: 1;
@@ -191,39 +172,26 @@ a:focus {
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   color: var(--secondary);
 }
-
 ::ng-deep .mat-form-field-underline {
   background-color: var(--secondary) !important;
   opacity: .7;
 }
-
 ::ng-deep .mat-form-field-ripple {
   background-color: var(--secondary) !important;
   opacity: 1;
 }
-
 ::ng-deep .mat-select-arrow {
   color: var(--tertiary) !important;
 }
-
 :host ::ng-deep .mat-select-value-text {
   color: var(--tertiary) !important;
 }
-
 ::ng-deep .mat-select-panel {
   background-color: var(--secondary) !important;
 }
-
 ::ng-deep .mat-option {
   color: var(--primary) !important;
 }
 ::ng-deep .mat-option.mat-selected {
   filter: brightness(85%);
-}
-
-mat-divider {
-  background-color: var(--secondary);
-  width: 0;
-  height: 50%;
-  align-self: center;
 }

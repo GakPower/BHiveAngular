@@ -1,44 +1,42 @@
-.container {
+#container {
   position: absolute;
+  top: 5vh;
+  left: 50vw;
   transform: translate(-50%);
+  margin: 0;
 
   display: flex;
+  flex-direction: column;
+
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 #profileIcon {
-  top: 10vh;
-  left: 50vw;
-
-  border: 2px solid var(--secondary);
-  border-radius: 50%;
-
   width: 15vh;
   height: 15vh;
   min-height: 120px;
   min-width: 120px;
+
+  border: 2px solid var(--secondary);
+  border-radius: 50%;
 }
 #options {
-  top: 35vh;
-  left: 50vw;
-
   width: 20vh;
   height: 20vh;
   min-height: 150px;
   min-width: 200px;
-
-  flex-direction: column;
 }
 #options ul {
   margin-bottom: 2vh;
+  margin-top: 40px;
   padding: 10px;
+
   border: 1px solid var(--secondary);
   border-radius: 10px;
 
   list-style: none;
   text-align: center;
-
-  margin-top: 40px;
 }
 #options ul li, img {
   color: var(--secondary);
@@ -58,23 +56,48 @@
   text-decoration-color: var(--secondary);
   cursor: pointer;
 }
-button {
+#changePassButton {
+  padding: 0;
+  transform: translateX(-15%);
+
+  width: 15vw;
+  height: 5vh;
+  min-height: 75px;
+  min-width: 100px;
+
   color: var(--secondary);
   font-family: var(--secondaryFont);
   font-size: 1.2rem;
   background-color: var(--primary);
   border: 1px solid var(--secondary);
   border-radius: 10px;
-  width: 15vw;
-  height: 5vh;
-  min-height: 75px;
-  min-width: 100px;
-  padding: 0;
+
   cursor: pointer;
 
   transition: color 500ms, background-color 500ms;
 }
-/*button:hover {*/
-/*  color: var(--primary);*/
-/*  background-color: var(--secondary);*/
-/*}*/
+#logoutButton {
+  align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  min-width: 40px;
+  height: 40px;
+
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+#logoutButton:hover,
+#logoutButton:focus,
+#changePassButton:hover,
+#changePassButton:focus{
+  background-color: var(--secondaryHover);
+}

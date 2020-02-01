@@ -13,8 +13,8 @@ export class MonitorComponent implements OnInit {
   isSignedIn;
   scales;
   LineChart: Chart = [];
-  primary = '#362F27';
-  secondary = '#FFAC1D';
+  primary = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+  secondary = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
   selectedScale;
 
   liveData = {
@@ -213,8 +213,6 @@ export class MonitorComponent implements OnInit {
                 date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().data.weight});
             this.LineChart.update();
           } else if (date.getDate() < lastDay) {
-            console.log(lastDay);
-            console.log(date.getDate());
             return true;
           }
         });

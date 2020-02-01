@@ -80,6 +80,10 @@ a:focus {
 }
 #forms mat-form-field input {
   min-height: 30px;
+  user-select: text;
+}
+#forms mat-form-field input::selection {
+  background-color: var(--secondaryHighlight);
 }
 #forms mat-form-field button {
   margin-top: 13px;

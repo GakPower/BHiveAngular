@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {UserService} from '../shared/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,16 +14,19 @@ export class ProfileComponent implements OnInit {
 
   scales = [];
   loading = false;
+  scalesUnsubscribe;
+
   constructor(private aut: AngularFireAuth,
               private db: AngularFirestore,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
     if (aut.auth.currentUser == null) {
       this.router.navigate(['/login']);
     }
   }
 
   ngOnInit() {
-    this.db.firestore.collection('users')
+    this.scalesUnsubscribe = this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
       .onSnapshot((doc) => {
         this.scales = doc.data().scales;
@@ -44,6 +48,13 @@ export class ProfileComponent implements OnInit {
         this.loading = false;
       });
     });
+  }
+
+  signOut() {
+    this.scalesUnsubscribe();
+    this.aut.auth.signOut();
+    this.userService.updateSignIn(false);
+    this.router.navigate(['login']);
   }
 
 }

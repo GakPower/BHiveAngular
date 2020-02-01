@@ -1,12 +1,18 @@
 <div id="forgotPassForm">
+  <button (click)="router.navigate(['/login']);" matRipple [matRippleColor]="'var(--secondaryRipple)'">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
   <h1>Forgot Password</h1>
 
   <div id="forms">
-    <p>Enter the email of your account below. You will receive an email to <span>reset your password</span></p>
+    <p>Enter the email of your account below.
+      You will receive an email to <span>reset your password</span>
+    </p>
 
     <mat-form-field class="field" appearance="outline">
       <mat-label> Email</mat-label>
-      <input matInput aria-label="" type="email" [formControl]="emailForm" (keyup.enter)="onSubmit()" appAutoFocus="200">
+      <input matInput aria-label="" type="email" [formControl]="emailForm"
+             (keyup.enter)="onSubmit()" appAutoFocus="200">
 
       <mat-error *ngIf="emailForm.hasError('empty') ||
        emailForm.hasError('notEmail') ||
@@ -16,5 +22,5 @@
 
     </mat-form-field>
   </div>
-  <button (click)="onSubmit()">Send Email</button>
+  <button (click)="onSubmit()" matRipple [matRippleColor]="'var(--secondaryRipple)'">Send Email</button>
 </div>
