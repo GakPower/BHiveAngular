@@ -11,18 +11,21 @@
         <p>BHive</p>
       </div>
       <div id="menuButtons">
-        <button>Home</button>
-        <button routerLink="/monitor" *ngIf="signedIn">Monitor</button>
-        <button routerLink="/stats" *ngIf="signedIn">Statistics</button>
-        <button (click)="scrollToBottom()">Contact us</button>
+        <button matRipple [matRippleColor]="color">Home</button>
+        <button matRipple [matRippleColor]="color" routerLink="/monitor" *ngIf="signedIn">Monitor</button>
+        <button matRipple [matRippleColor]="color" routerLink="/stats" *ngIf="signedIn">Statistics</button>
+        <button matRipple [matRippleColor]="color" (click)="scrollToBottom()">Contact us</button>
         <div class="menuButtonGroup" *ngIf="!signedIn">
-          <button routerLink="/login">Login</button>
-          <button routerLink="/register">Join</button>
+          <button matRipple [matRippleColor]="color" routerLink="/login">Login</button>
+          <button matRipple [matRippleColor]="color" routerLink="/register">Join</button>
         </div>
 
         <div class="menuButtonGroup" id="signedInGroup" *ngIf="signedIn">
-          <button><mat-icon>settings</mat-icon></button>
-          <button><mat-icon >person</mat-icon><span style="margin-top: 2px; margin-left: 3px">Profile</span></button>
+          <button matRipple [matRippleColor]="color"><mat-icon>settings</mat-icon></button>
+          <button matRipple [matRippleColor]="color" routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span style="margin-top: 2px; margin-left: 3px">Profile</span>
+          </button>
         </div>
       </div>
     </div>

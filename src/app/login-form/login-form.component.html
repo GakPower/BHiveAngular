@@ -4,18 +4,26 @@
   <div id="forms">
     <mat-form-field appearance="outline">
       <mat-label> Email</mat-label>
-      <input matInput aria-label="" type="email" [(ngModel)]="email" (keyup.enter)="onSubmit()">
+      <input matInput aria-label="" type="email" [formControl]="emailForm" (keyup.enter)="onSubmit()" appAutoFocus="50">
+
+      <mat-error *ngIf="emailForm.hasError('empty') ||
+        emailForm.hasError('notEmail')">{{emailErrorText}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label> Password</mat-label>
-      <input matInput [type]="type" [(ngModel)]="password"  maxlength="25" (keyup.enter)="onSubmit()">
-      <button mat-button matSuffix mat-icon-button *ngIf="password" (click)="showHide()">
+      <input matInput [type]="type" [formControl]="passForm" (keyup.enter)="onSubmit()" appAutoFocus="10">
+      <button mat-button matSuffix mat-icon-button *ngIf="passForm.value" (click)="showHide()">
         <mat-icon *ngIf="show">visibility_on</mat-icon>
         <mat-icon *ngIf="!show">visibility_off</mat-icon>
       </button>
+
+      <mat-error *ngIf="passForm.hasError('empty') ||
+        passForm.hasError('wrongComb')">{{passErrorText}}</mat-error>
     </mat-form-field>
+
     <a routerLink="/forgotPass">Forgot Password?</a>
+
   </div>
-  <button (click)="onSubmit()">Login</button>
+  <button matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="onSubmit()">Login</button>
 </div>

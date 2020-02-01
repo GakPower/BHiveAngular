@@ -62,18 +62,21 @@ a:focus {
   background-color: var(--primary) !important;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: var(--secondary);
-  border: 1px solid var(--secondary);
+  border: 0;
   border-radius: 25px;
   height: 40px;
   margin-left: 10px;
+  padding: 0;
+  cursor: pointer;
 
   transform: translateY(38%);
-  transition: background-color 500ms, transform 500ms;
+  transition: transform 500ms;
 }
-#selectRec button:hover {
-  background-color: var(--secondary) !important;
-  transform: translateY(38%) rotate(180deg);
+#selectRec button:hover .mat-icon {
+  /*background-color: var(--secondary) !important;*/
+  transform: rotate(360deg);
 }
 #selectRec button .mat-icon {
   color: var(--secondary);
@@ -83,12 +86,12 @@ a:focus {
   line-height: 20px;
   margin-left: 2px;
 
-  transition: color 500ms;
+  transition: transform 500ms;
 }
-#selectRec button:hover .mat-icon {
-  color: var(--primary);
-}
-#selectRec button:active .mat-icon {
+/*#selectRec button:hover .mat-icon {*/
+/*  color: var(--primary);*/
+/*}*/
+#selectRec button .mat-icon {
   margin-left: 2px;
 }
 
@@ -216,4 +219,11 @@ a:focus {
 }
 ::ng-deep .mat-option.mat-selected {
   filter: brightness(85%);
+}
+
+mat-divider {
+  background-color: var(--secondary);
+  width: 0;
+  height: 50%;
+  align-self: center;
 }

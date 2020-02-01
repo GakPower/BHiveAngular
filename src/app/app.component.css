@@ -4,7 +4,10 @@
   /*--primary: #3A3637;*/
   /*--secondary: #FCB43A;*/
   --primary: #362F27;
+  --primaryHover: rgba(54, 47, 39, 0.25);
   --secondary: #FFAC1D;
+  --secondaryHover: rgba(255, 172, 29, 0.1);
+  --secondaryRipple: rgba(255, 172, 29, 0.25);
   --tertiary: #F8F5F0;
 
   --primaryFont: 'Viga', sans-serif;
@@ -32,7 +35,7 @@ header p {
   position: relative;
 
   width: 0;
-  height: 0;
+  height: 100%;
 
   border-top: 6vh solid transparent;
   border-right: calc(100vw - 17px) solid var(--primary);
@@ -40,6 +43,9 @@ header p {
   border-left: 0 solid var(--primary);
 
   margin-top: 160px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 #smallLogo {
@@ -143,14 +149,14 @@ header p {
 #menuButtons .menuButtonGroup button {
   color: var(--secondary);
   background-color: var(--primary);
-  border: 1px solid var(--secondary);
+  /*border: 1px solid var(--secondary);*/
   border-radius: 25px;
 }
-#menuButtons .menuButtonGroup button:hover,
-#menuButtons .menuButtonGroup button:focus {
-  color: var(--primary);
-  background: var(--secondary);
-}
+/*#menuButtons .menuButtonGroup button:hover,*/
+/*#menuButtons .menuButtonGroup button:focus {*/
+/*  color: var(--primary);*/
+/*  background: var(--secondary);*/
+/*}*/
 
 #signedInGroup button {
   min-width: 35px;
@@ -158,10 +164,10 @@ header p {
   display: flex;
   align-items: center;
 }
-#signedInGroup button:hover,
-#signedInGroup button:focus {
-  background-color: var(--secondary) !important;
-}
+/*#signedInGroup button:hover,*/
+/*#signedInGroup button:focus {*/
+/*  background-color: var(--secondary) !important;*/
+/*}*/
 #signedInGroup button .mat-icon {
   color: var(--secondary);
   font-size: 1rem;
@@ -172,7 +178,7 @@ header p {
 
   transition: color 500ms;
 }
-#signedInGroup button:hover .mat-icon,
-#signedInGroup button:focus .mat-icon {
-  color: var(--primary);
-}
+/*#signedInGroup button:hover .mat-icon,*/
+/*#signedInGroup button:focus .mat-icon {*/
+/*  color: var(--primary);*/
+/*}*/

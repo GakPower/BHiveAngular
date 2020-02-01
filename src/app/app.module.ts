@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule, MatInputModule } from '@angular/material';
+import {MatIconModule, MatInputModule, MatProgressSpinnerModule, MatRippleModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -18,12 +18,18 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ProfileComponent } from './profile/profile.component';
+import { StatsComponent } from './stats/stats.component';
+import { AutoFocusDirective } from './auto-focus.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    ContactButtonsComponent
+    ContactButtonsComponent,
+    ProfileComponent,
+    StatsComponent,
+    AutoFocusDirective
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatOptionModule,
     MatSelectModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRippleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

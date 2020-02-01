@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Chart} from 'chart.js';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-monitor',
@@ -28,8 +29,14 @@ export class MonitorComponent implements OnInit {
   };
 
   constructor(private aut: AngularFireAuth,
-              private db: AngularFirestore) {
-    this.updateScales();
+              private db: AngularFirestore,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    if (aut.auth.currentUser != null) {
+      this.updateScales();
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit() {
@@ -48,7 +55,7 @@ export class MonitorComponent implements OnInit {
           label: 'Yesterday',
           fill: false,
           lineTension: .2,
-          borderColor: 'rgba(255, 255, 255, .4)',
+          borderColor: 'rgb(153,153,153)',
           borderWidth: 4
         }]
       },
@@ -143,8 +150,16 @@ export class MonitorComponent implements OnInit {
   updateScales() {
     this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
-      .onSnapshot((doc) => {
-        this.scales = doc.data().scales;
+      .get().then((doc) => {
+        this.activatedRoute.params.subscribe(params => {
+          this.scales = doc.data().scales;
+          if (params.s != null && this.scales.includes(params.s)) {
+            this.selectedScale = params.s;
+          } else if (this.scales.length > 0) {
+            this.selectedScale = this.scales[0];
+          }
+          this.updateScaleData();
+        });
       });
   }
 
