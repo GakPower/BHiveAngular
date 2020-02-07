@@ -39,15 +39,17 @@ export class ProfileComponent implements OnInit {
 
   sendPassReset() {
     this.loading = true;
-    this.aut.auth.sendPasswordResetEmail(this.aut.auth.currentUser.email).then(() => {
-      Swal.fire(
-        'Done!',
-        'An email has been sent to <strong>' + this.aut.auth.currentUser.email + '</strong> to reset your password',
-        'success'
-      ).then(() => {
-        this.loading = false;
+    setTimeout(() => {
+      this.aut.auth.sendPasswordResetEmail(this.aut.auth.currentUser.email).then(() => {
+        Swal.fire(
+          'Done!',
+          'An email has been sent to <strong>' + this.aut.auth.currentUser.email + '</strong> to reset your password',
+          'success'
+        ).then(() => {
+          this.loading = false;
+        });
       });
-    });
+    }, 500);
   }
 
   signOut() {

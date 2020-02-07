@@ -26,5 +26,5 @@
     <a routerLink="/forgotPass">Forgot Password?</a>
 
   </div>
-  <button matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="onSubmit()">Login</button>
+  <button (click)="onSubmit()" [disabled]="disabled" matRipple [matRippleColor]="'var(--secondaryRipple)'">Login</button>
 </div>

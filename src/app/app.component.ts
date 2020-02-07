@@ -29,7 +29,7 @@ export class AppComponent {
               private aut: AngularFireAuth) {
     aut.auth.signOut();
     setInterval(() => {
-      this.fixed = window.pageYOffset > 198;
+      this.fixed = window.pageYOffset > 220;
     }, 1);
 
     this.userService.isSignedIn().subscribe(isSigned => {

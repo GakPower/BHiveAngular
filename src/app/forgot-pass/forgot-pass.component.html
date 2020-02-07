@@ -22,5 +22,5 @@
 
     </mat-form-field>
   </div>
-  <button (click)="onSubmit()" matRipple [matRippleColor]="'var(--secondaryRipple)'">Send Email</button>
+  <button (click)="onSubmit()" [disabled]="disabled" matRipple [matRippleColor]="'var(--secondaryRipple)'">Send Email</button>
 </div>

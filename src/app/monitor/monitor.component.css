@@ -11,19 +11,10 @@ mat-divider {
   background-color: var(--secondary);
 }
 
-.container {
-  position: absolute;
-  margin: 0;
-  transform: translate(-50%);
-
-  text-align: center;
-}
-
 #selectRec {
-  top: 10vh;
-  left: 50vw;
-
   display: flex;
+  margin-left: 50%;
+  transform: translateX(-50%);
 
   width: 30vw;
   min-width: 200px;
@@ -81,14 +72,15 @@ mat-divider {
   border: 1px solid var(--secondary);
 }
 #monitorData {
-  top: 20vh;
-  left: 50vw;
+  margin: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 95vw;
+
+  text-align: center;
 }
 #lineChartContainer {
   position: relative;

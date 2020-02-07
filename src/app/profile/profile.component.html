@@ -12,7 +12,7 @@
       <li>Registered scales:</li>
       <li *ngFor="let scale of scales" (click)="toMonitor(scale)">{{scale}}</li>
     </ul>
-    <button id="changePassButton" (click)="sendPassReset()" matRipple [matRippleColor]="'var(--secondaryRipple)'" >Change Password</button>
+    <button id="changePassButton" (click)="sendPassReset()" [disabled]="loading" matRipple [matRippleColor]="'var(--secondaryRipple)'" >Change Password</button>
     <img src="../../assets/loading.gif" height="100" width="100" *ngIf="loading"/>
   </div>
 </div>

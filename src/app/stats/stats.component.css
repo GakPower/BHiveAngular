@@ -1,7 +1,17 @@
-#fullContainer {
-  position: absolute;
-  top: 40px;
-  left: 0;
+#container {
   width: 100%;
-  height: calc(100% - 40px);
+  height: 100%;
+}
+
+.mat-tab-label {
+  background-color: transparent;
+  color: var(--secondary);
+  font-family: var(--secondaryFont);
+  font-size: 1.2rem;
+}
+.mat-tab-label.mat-tab-label-active {
+  background-color: transparent;
+  color: var(--secondary);
+  font-family: var(--secondaryFont);
+  font-size: 1.2rem;
 }

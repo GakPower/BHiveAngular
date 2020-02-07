@@ -21,6 +21,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ProfileComponent } from './profile/profile.component';
 import { StatsComponent } from './stats/stats.component';
 import { AutoFocusDirective } from './auto-focus.directive';
+import { ScaleStatsComponent } from './scale-stats/scale-stats.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AutoFocusDirective } from './auto-focus.directive';
     ContactButtonsComponent,
     ProfileComponent,
     StatsComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    ScaleStatsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,8 @@
-<div id="fullContainer">
-
+<div id="container">
+  <mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab [label]="'General'" ></mat-tab>
+    <mat-tab [label]="'Two'">
+      <app-scale-stats scale="Two"></app-scale-stats>
+    </mat-tab>
+  </mat-tab-group>
 </div>

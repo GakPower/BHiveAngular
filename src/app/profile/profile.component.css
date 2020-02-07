@@ -1,8 +1,4 @@
 #container {
-  position: absolute;
-  top: 5vh;
-  left: 50vw;
-  transform: translate(-50%);
   margin: 0;
 
   display: flex;
@@ -11,15 +7,17 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-color: var(--primary);
 }
 #profileIcon {
-  width: 15vh;
-  height: 15vh;
+  width: 13vh;
+  height: 13vh;
   min-height: 120px;
   min-width: 120px;
 
   border: 2px solid var(--secondary);
   border-radius: 50%;
+  background-color: var(--primary);
 }
 #options {
   width: 20vh;
@@ -100,4 +98,10 @@
 #changePassButton:hover,
 #changePassButton:focus{
   background-color: var(--secondaryHover);
+}
+#changePassButton:disabled {
+  background-color: var(--primary);
+  border: 1px solid var(--secondaryDisabled);
+  color: var(--secondaryDisabled);
+  cursor: default;
 }

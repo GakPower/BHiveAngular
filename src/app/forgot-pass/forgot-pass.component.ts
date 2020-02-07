@@ -22,6 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ForgotPassComponent implements OnInit {
   emailForm = new FormControl('');
   emailErrorText = '';
+  disabled = false;
 
   constructor(private aut: AngularFireAuth,
               public router: Router,
@@ -36,32 +37,39 @@ export class ForgotPassComponent implements OnInit {
   }
 
   onSubmit() {
-    const email = this.emailForm.value;
-    if (!email) {
-      this.emailForm.setErrors({empty: true});
-      this.emailErrorText = 'The field can not be empty';
-    } else if (email.indexOf('@') === -1) {
-      this.emailForm.setErrors({notEmail: true});
-      this.emailErrorText = 'Wrongly formatted email';
-    } else {
-      this.aut.auth.fetchSignInMethodsForEmail(email).then((s) => {
-        if (s.length === 0) {
-          this.emailErrorText = 'There is not an account with that email';
-          this.emailForm.setErrors({accMailNotFound: true});
-        } else {
-          this.aut.auth.sendPasswordResetEmail(email).then(() => {
-            Swal.fire(
-              'Done!',
-              'An email has been sent to <strong>' + email + '</strong> to reset your password',
-              'success'
-            ).then(() => {
-              this.emailForm.reset();
-              this.router.navigate(['/login']);
+    this.disabled = true;
+    setTimeout(() => {
+      const email = this.emailForm.value;
+      if (!email) {
+        this.emailForm.setErrors({empty: true});
+        this.emailErrorText = 'The field can not be empty';
+        this.disabled = false;
+      } else if (email.indexOf('@') === -1) {
+        this.emailForm.setErrors({notEmail: true});
+        this.emailErrorText = 'Wrongly formatted email';
+        this.disabled = false;
+      } else {
+        this.aut.auth.fetchSignInMethodsForEmail(email).then((s) => {
+          if (s.length === 0) {
+            this.emailErrorText = 'There is not an account with that email';
+            this.emailForm.setErrors({accMailNotFound: true});
+            this.disabled = false;
+          } else {
+            this.aut.auth.sendPasswordResetEmail(email).then(() => {
+              Swal.fire(
+                'Done!',
+                'An email has been sent to <strong>' + email + '</strong> to reset your password',
+                'success'
+              ).then(() => {
+                this.emailForm.reset();
+                this.router.navigate(['/login']);
+              });
+              this.disabled = false;
             });
-          });
-        }
-      });
-    }
+          }
+        });
+      }
+    }, 1000);
   }
 
 }

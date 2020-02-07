@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { StatsComponent } from './stats.component';
 
-describe('StatsComponent', () => {
-  let component: StatsComponent;
-  let fixture: ComponentFixture<StatsComponent>;
+import { ScaleStatsComponent } from './scale-stats.component';
+
+describe('ScaleStatsComponent', () => {
+  let component: ScaleStatsComponent;
+  let fixture: ComponentFixture<ScaleStatsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatsComponent ]
+      declarations: [ ScaleStatsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatsComponent);
+    fixture = TestBed.createComponent(ScaleStatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

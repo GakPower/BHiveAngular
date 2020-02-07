@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Chart} from 'chart.js';
 import {AngularFirestore} from '@angular/fire/firestore';
@@ -19,7 +19,7 @@ export class MonitorComponent implements OnInit {
 
   liveData = {
     weight: 0,
-    diff: '0',
+    diff: 0,
     tempIn: 0,
     humIn: 0,
     tempOut: 0,
@@ -163,6 +163,19 @@ export class MonitorComponent implements OnInit {
       });
   }
 
+  extractData(data) {
+    return {
+      weight: data.weight,
+      diff: data.diff > 0 ? '+' + data.diff : data.diff,
+      tempIn: data.tempIn,
+      humIn: data.humIn,
+      tempOut: data.tempOut,
+      humOut: data.humOut,
+      batt: data.batt,
+      signal: data.signal,
+    };
+  }
+
   updateLiveData() {
     this.db.firestore.collection('scales')
       .doc(this.aut.auth.currentUser.uid)
@@ -172,7 +185,7 @@ export class MonitorComponent implements OnInit {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          this.liveData = doc.data().data;
+          this.liveData = this.extractData(doc.data());
         });
       });
   }
@@ -189,7 +202,7 @@ export class MonitorComponent implements OnInit {
           const date = doc.data().time.toDate();
           if (lastDay === date.getDate()) {
             this.LineChart.data.datasets[0].data.push({t: new Date(0, 0, 0,
-                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().data.weight});
+                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
             this.LineChart.update();
           } else {
             return true;
@@ -210,7 +223,7 @@ export class MonitorComponent implements OnInit {
           const date = doc.data().time.toDate();
           if (date.getDate() === lastDay) {
             this.LineChart.data.datasets[1].data.push({t: new Date(0, 0, 0,
-                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().data.weight});
+                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
             this.LineChart.update();
           } else if (date.getDate() < lastDay) {
             return true;

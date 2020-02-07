@@ -19,6 +19,7 @@ export class LoginFormComponent implements OnInit {
   public signedIn;
   emailErrorText = '';
   passErrorText = '';
+  disabled = false;
 
   constructor(private aut: AngularFireAuth,
               private router: Router,
@@ -40,31 +41,35 @@ export class LoginFormComponent implements OnInit {
     this.type = this.show ? 'text' : 'password';
   }
   onSubmit() {
-    this.aut.auth.signInWithEmailAndPassword(this.emailForm.value, this.passForm.value).then(() => {
-        this.emailForm.reset();
-        this.passForm.reset();
+    this.disabled = true;
+    setTimeout(() => {
+      this.aut.auth.signInWithEmailAndPassword(this.emailForm.value, this.passForm.value).then(() => {
+          this.emailForm.reset();
+          this.passForm.reset();
 
-        this.userService.updateSignIn(true);
-        this.router.navigate(['/monitor']);
+          this.userService.updateSignIn(true);
+          this.router.navigate(['/monitor']);
 
-        console.log(this.aut.auth.currentUser.uid);
-      }
-    ).catch((reason => {
-      if (!this.emailForm.value) {
-        this.emailForm.setErrors({empty: true});
-        this.emailErrorText = 'The field can not be empty';
-      } else if (reason.code === 'auth/invalid-email') {
-        this.emailForm.setErrors({notEmail: true});
-        this.emailErrorText = 'Wrongly formatted email';
-      }
+          this.disabled = false;
+        }
+      ).catch((reason => {
+        if (!this.emailForm.value) {
+          this.emailForm.setErrors({empty: true});
+          this.emailErrorText = 'The field can not be empty';
+        } else if (reason.code === 'auth/invalid-email') {
+          this.emailForm.setErrors({notEmail: true});
+          this.emailErrorText = 'Wrongly formatted email';
+        }
 
-      if (!this.passForm.value) {
-        this.passForm.setErrors({empty: true});
-        this.passErrorText = 'The field can not be empty';
-      } else if (reason.code === 'auth/wrong-password' || reason.code === 'auth/user-not-found') {
-        this.passForm.setErrors({wrongComb: true});
-        this.passErrorText = 'Invalid combination of email and password';
-      }
-    }));
+        if (!this.passForm.value) {
+          this.passForm.setErrors({empty: true});
+          this.passErrorText = 'The field can not be empty';
+        } else if (reason.code === 'auth/wrong-password' || reason.code === 'auth/user-not-found') {
+          this.passForm.setErrors({wrongComb: true});
+          this.passErrorText = 'Invalid combination of email and password';
+        }
+        this.disabled = false;
+      }));
+    }, 1000);
   }
 }
