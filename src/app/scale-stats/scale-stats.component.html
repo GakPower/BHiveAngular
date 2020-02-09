@@ -2,33 +2,81 @@
   <div class="container" id="topStats">
     <div>
       <p>Weight</p>
-      <p>Highest: <span>{{this.weightStat.high}}g</span></p>
-      <p>Lowest: <span>{{this.weightStat.low}}g</span></p>
+      <p matTooltip="{{getTooltipMessage(weightStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{weightStat.high.stat}}g</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(weightStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{weightStat.low.stat}}g</span>
+      </p>
     </div>
     <div>
       <p>Weight Difference</p>
-      <p>Highest: <span>{{this.diffStat.high}}g</span></p>
-      <p>Lowest: <span>{{this.diffStat.low}}g</span></p>
+      <p matTooltip="{{getTooltipMessage(diffStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{diffStat.high.stat}}g</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(diffStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{diffStat.low.stat}}g</span>
+      </p>
     </div>
     <div>
       <p>Temp In</p>
-      <p>Highest: <span>{{this.tempInStat.high}}°C</span></p>
-      <p>Lowest: <span>{{this.tempInStat.low}}°C</span></p>
+      <p matTooltip="{{getTooltipMessage(tempInStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{tempInStat.high.stat}}°C</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(tempInStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{tempInStat.low.stat}}°C</span>
+      </p>
     </div>
     <div>
       <p>Temp Out</p>
-      <p>Highest: <span>{{this.tempOutStat.high}}°C</span></p>
-      <p>Lowest: <span>{{this.tempOutStat.low}}°C</span></p>
+      <p matTooltip="{{getTooltipMessage(tempOutStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{tempOutStat.high.stat}}°C</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(tempOutStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{tempOutStat.low.stat}}°C</span>
+      </p>
     </div>
     <div>
       <p>Hum In</p>
-      <p>Highest: <span>{{this.humInStat.high}}%</span></p>
-      <p>Lowest: <span>{{this.humInStat.low}}%</span></p>
+      <p matTooltip="{{getTooltipMessage(humInStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{humInStat.high.stat}}%</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(humInStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{humInStat.low.stat}}%</span>
+      </p>
     </div>
     <div>
       <p>Hum Out</p>
-      <p>Highest: <span>{{this.humOutStat.high}}%</span></p>
-      <p>Lowest: <span>{{this.humOutStat.low}}%</span></p>
+      <p matTooltip="{{getTooltipMessage(humOutStat.high)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Highest: <span>{{humOutStat.high.stat}}%</span>
+      </p>
+      <p matTooltip="{{getTooltipMessage(humOutStat.low)}}"
+         [matTooltipShowDelay]="animationDelay"
+         matTooltipClass="tooltip">
+        Lowest: <span>{{humOutStat.low.stat}}%</span>
+      </p>
     </div>
   </div>
 </div>

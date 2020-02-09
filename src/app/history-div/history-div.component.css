@@ -1,0 +1,72 @@
+mat-divider {
+  width: 0;
+  height: 50%;
+  align-self: center;
+
+  background-color: var(--secondary);
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+
+  width: 25vw;
+  min-width: 150px;
+
+  border: 1px solid var(--secondaryRipple);
+  border-radius: 10px;
+  background-color: var(--primary);
+}
+#container > p:first-child {
+  padding: 0;
+  margin: 5px 5px 0 0;
+
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+  font-size: calc(5px + .6vw);
+
+  align-self: flex-end;
+}
+#container > p {
+  padding: 0;
+  margin: 0 5px 0 0;
+
+  color: var(--secondary);
+  font-family: var(--secondaryFont);
+  font-size: calc(5px + .6vw);
+
+  align-self: flex-end;
+}
+
+.dataGroup {
+  color: var(--secondary);
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+}
+.dataGroup div {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.dataGroup div svg {
+  width: calc(5px + 1.2vw);
+  min-width: calc(5px + 1.2vw);
+  margin-left: 5px;
+
+  fill: var(--secondary);
+}
+.dataGroup div span {
+  font-size: calc(5px + 1.2vw);
+  font-family: var(--secondaryFont);
+}
+.dataGroup div span:last-child {
+  font-size: calc(5px + .6vw);
+}
+.dataGroup div div {
+  display: flex;
+  flex-direction: column;
+}

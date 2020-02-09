@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: calc(100vw - 60px);
 }
 #topStats {
   justify-content: center;
@@ -26,6 +26,13 @@
   color: var(--secondary);
   font-family: var(--secondaryFont);
   font-size: 1.1rem;
+}
+
+.tooltip {
+  font-size: 1rem;
+  font-family: var(--secondaryFont);
+  background-color: var(--primaryRipple);
+  white-space: pre-line;
 }
 
 /*#charts {*/

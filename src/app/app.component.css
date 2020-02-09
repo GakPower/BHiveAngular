@@ -1,6 +1,7 @@
 ::ng-deep :root {
   --primary: #362F27;
   --primaryHover: rgba(54, 47, 39, 0.25);
+  --primaryRipple: rgba(69, 62, 54, 0.9);
   --secondary: #FFAC1D;
   --secondaryHover: rgba(255, 172, 29, 0.1);
   --secondaryRipple: rgba(255, 172, 29, 0.25);

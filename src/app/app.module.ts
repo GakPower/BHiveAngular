@@ -22,6 +22,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { StatsComponent } from './stats/stats.component';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { ScaleStatsComponent } from './scale-stats/scale-stats.component';
+import {MatTooltipModule} from '@angular/material';
+import { HistoryComponent } from './history/history.component';
+import { HistoryDataComponent } from './history-data/history-data.component';
+import { HistoryDivComponent } from './history-div/history-div.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,11 @@ import { ScaleStatsComponent } from './scale-stats/scale-stats.component';
     ProfileComponent,
     StatsComponent,
     AutoFocusDirective,
-    ScaleStatsComponent
+    ScaleStatsComponent,
+    HistoryComponent,
+    HistoryDataComponent,
+    HistoryDivComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,8 @@ import { ScaleStatsComponent } from './scale-stats/scale-stats.component';
     MatDividerModule,
     MatTabsModule,
     MatRippleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,9 @@
+<div id="container">
+  <div class="container" id="history">
+    <app-history-div *ngFor="let historyData of history" [data]="historyData" [latest]="history.indexOf(historyData) == 0">
+    </app-history-div>
+    <p *ngIf="allData-history.length > 0">+{{allData-history.length}} available</p>
+  </div>
+  <button *ngIf="allData-history.length > 0" (click)="fetchData(1)" id="showMoreButton" matRipple [matRippleColor]="'var(--secondaryRipple)'">
+    Show More...</button>
+</div>

@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {UserService} from '../shared/user.service';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.css'],
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class StatsComponent implements OnInit {
+export class HistoryComponent implements OnInit {
+
   scalesUnsubscribe;
   scales = [];
 

@@ -6,6 +6,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import {ProfileComponent} from './profile/profile.component';
 import {StatsComponent} from './stats/stats.component';
+import {HistoryComponent} from './history/history.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'monitor', component: MonitorComponent},
   { path: 'forgotPass', component: ForgotPassComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'stats', component: StatsComponent}
+  { path: 'stats', component: StatsComponent},
+  { path: 'history', component: HistoryComponent}
 ];
 
 @NgModule({
@@ -23,4 +25,4 @@ const routes: Routes = [
 export class AppRoutingModule {}
 export const routingComponents = [LoginFormComponent,
   RegisterComponent, MonitorComponent, ForgotPassComponent,
-  ProfileComponent, StatsComponent];
+  ProfileComponent, StatsComponent, HistoryComponent];
