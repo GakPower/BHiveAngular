@@ -23,7 +23,7 @@ export class StatsComponent implements OnInit {
     this.scalesUnsubscribe = this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
       .onSnapshot((doc) => {
-        this.scales = doc.data().scales;
+        this.scales = doc.data().scales.map(x => x.name);
       });
   }
 

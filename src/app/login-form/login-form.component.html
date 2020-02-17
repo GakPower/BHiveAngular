@@ -3,7 +3,7 @@
 
   <div id="forms">
     <mat-form-field appearance="outline">
-      <mat-label> Email</mat-label>
+      <mat-label>Email</mat-label>
       <input matInput aria-label="" type="email" [formControl]="emailForm"
              (keyup.enter)="onSubmit()" appAutoFocus="50">
 
@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label> Password</mat-label>
+      <mat-label>Password</mat-label>
       <input matInput [type]="type" [formControl]="passForm" (keyup.enter)="onSubmit()" appAutoFocus="10">
       <button mat-button matSuffix mat-icon-button *ngIf="passForm.value" (click)="showHide()">
         <mat-icon *ngIf="show">visibility_on</mat-icon>

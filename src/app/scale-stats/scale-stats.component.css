@@ -34,20 +34,3 @@
   background-color: var(--primaryRipple);
   white-space: pre-line;
 }
-
-/*#charts {*/
-/*  justify-content: center;*/
-/*}*/
-/*#charts > div {*/
-/*  position: relative;*/
-
-/*  height: 350px;*/
-/*  width: 600px;*/
-/*  padding: 0 15px 0 5px;*/
-/*  margin-right: 10px;*/
-/*  margin-left: 10px;*/
-/*  margin-bottom: 20px;*/
-
-/*  border: 1px var(--secondaryRipple) solid;*/
-/*  border-radius: 10px;*/
-/*}*/

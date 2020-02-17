@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: var(--secondary);
+  font-size: 2.5rem;
+  font-family: var(--primaryFont);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+h4 {
+  color: var(--secondary);
+  font-family: var(--primaryFont);
+}
+mat-accordion {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+mat-expansion-panel {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary);
+  border-radius: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+mat-expansion-panel-header {
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+  border-radius: 0;
+}
+mat-panel-title {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  font-family: var(--secondaryFont);
+}
+ngx-material-timepicker-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: var(--secondary)
+}
+mat-icon {
+  width: 5px;
+  min-width: 5px;
+  height: 5px;
+  min-height: 5px;
+  font-size: 1rem;
+  color: var(--secondary);
+}
+
+#fullContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin: 20px 0 20px 0;
+}
+
+::ng-deep .tooltip {
+  font-size: 1rem;
+  font-family: var(--secondaryFont);
+  background-color: var(--primaryRipple);
+  white-space: pre-line;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 20px 20px 0;
+
+  width: 30vw;
+  min-height: 350px;
+  min-width: 400px;
+
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+
+  text-align: center;
+}
+.container > p {
+  color: var(--tertiary);
+  font-size: 1rem;
+  font: var(--secondaryFont);
+  padding: 10px;
+}
+.container > p > span {
+  color: var(--secondary);
+  font-size: 1.2rem;
+}
+.container > p > span[name= positive] {
+  color: var(--positive);
+  font-size: 1.05rem;
+}
+.container > p > span[name= negative] {
+  color: var(--negative);
+  font-size: 1.05rem;
+}
+.container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+.container > div > mat-radio-group {
+  width: 100%;
+}
+.container > div > mat-radio-group > div {
+  width: 100%;
+  min-height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--secondaryRipple);
+}
+.container > div > mat-radio-group > div > p {
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+}
+.container > div > button {
+  margin: 20px 10px 20px 0;
+  padding: 10px;
+
+  align-self: flex-end;
+
+  color: var(--secondary);
+  font-family: var(--secondaryFont);
+  font-size: 1.3rem;
+  background-color: var(--primary);
+
+  border: 1px solid var(--secondaryRipple);
+  border-radius: 15px;
+
+  transition: background-color 300ms;
+}
+.container > div > button:hover,
+.container > div > button:focus {
+  background-color: var(--secondaryHover);
+}
+.container > div > button:disabled {
+  background-color: var(--primary);
+  border: 1px solid var(--secondaryDisabled);
+  color: var(--secondaryDisabled);
+  cursor: default;
+}
+
+#panelContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#timePlanList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+#timePlanList > p {
+  color: var(--secondaryDisabled);
+  font-family: var(--secondaryFont);
+  font-size: 1rem;
+}
+#timePlanList > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  border: 1px solid var(--secondaryRipple);
+  border-radius: 10px;
+  line-height: 40px;
+
+  margin: 0 10px 10px 0;
+}
+#timePlanList > div > p {
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+  font-size: 1rem;
+}
+
+#panelContent > button:first-child,
+#timePlanList > div > button {
+  align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 5px 5px 0 0;
+
+  min-width: 40px;
+  height: 40px;
+
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+#panelContent > button:first-child:hover,
+#panelContent > button:first-child:focus,
+#timePlanList > div > button:hover,
+#timePlanList > div > button:focus{
+  background-color: var(--secondaryHover);
+}
+#timePlanList > div > button {
+  margin: 0 0 0 10px;
+}
+
+.mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title,
+.mat-expansion-panel-header .mat-expansion-panel-header-title {
+  color: var(--tertiary);
+}
+.mat-expansion-panel-header-description {
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+
+  border-radius: 0;
+}
+
+:host ::ng-deep .mat-radio-container{
+  height: 20px;
+  width: 20px;
+}
+:host ::ng-deep .mat-radio-outer-circle{
+  height: 20px;
+  width: 20px;
+}
+:host ::ng-deep .mat-radio-inner-circle{
+  height: 20px;
+  width: 20px;
+}

@@ -211,7 +211,7 @@ export class ScaleStatsComponent implements OnInit {
     this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
       .get().then((doc) => {
-        const scales = doc.data().scales;
+        const scales = doc.data().scales.map(x => x.name);
         for (const scale of scales) {
           this.getTopStats(scale);
         }

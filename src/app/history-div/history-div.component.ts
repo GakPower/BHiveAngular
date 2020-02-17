@@ -11,11 +11,36 @@ export class HistoryDivComponent implements OnInit {
   @Input() latest = true;
   date;
 
+  diff = '';
+  weight = 0;
+  signal = 0;
+  tempIn = 0;
+  tempOut = 0;
+  humIn = 0;
+  humOut = 0;
+  batt = 0;
+
   constructor() { }
 
   ngOnInit() {
     // @ts-ignore
     this.date = this.formatDate(this.data.time.toDate());
+    // @ts-ignore
+    this.diff = this.data.diff;
+    // @ts-ignore
+    this.weight = this.data.weight;
+    // @ts-ignore
+    this.signal = this.data.signal;
+    // @ts-ignore
+    this.humIn = this.data.humIn;
+    // @ts-ignore
+    this.humOut = this.data.humOut;
+    // @ts-ignore
+    this.tempIn = this.data.tempIn;
+    // @ts-ignore
+    this.tempOut = this.data.tempOut;
+    // @ts-ignore
+    this.batt = this.data.batt;
   }
 
   formatDate(date: Date): string {

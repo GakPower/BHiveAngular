@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  scales = [];
 
-  ngOnInit() {
+  constructor(private aut: AngularFireAuth,
+              private db: AngularFirestore,
+              private router: Router) {
+    if (aut.auth.currentUser == null) {
+      this.router.navigate(['/login']);
+    }
   }
 
+  ngOnInit(): void {
+    this.db.firestore.collection('users')
+      .doc(this.aut.auth.currentUser.uid)
+      .onSnapshot((doc) => {
+        this.scales = doc.data().scales.map(x => x.name);
+      });
+  }
 }

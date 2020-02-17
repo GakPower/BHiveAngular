@@ -152,7 +152,7 @@ export class MonitorComponent implements OnInit {
       .doc(this.aut.auth.currentUser.uid)
       .get().then((doc) => {
         this.activatedRoute.params.subscribe(params => {
-          this.scales = doc.data().scales;
+          this.scales = doc.data().scales.map(x => x.name);
           if (params.s != null && this.scales.includes(params.s)) {
             this.selectedScale = params.s;
           } else if (this.scales.length > 0) {

@@ -1,7 +1,5 @@
-<div id="container">
-  <mat-tab-group dynamicHeight mat-align-tabs="center" >
-    <mat-tab *ngFor="let scale of scales" [label]="scale">
-      <app-history-data scale="{{scale}}"></app-history-data>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+<mat-tab-group dynamicHeight mat-align-tabs="center" >
+  <mat-tab *ngFor="let scale of scales" [label]="scale">
+    <app-history-data scale="{{scale}}"></app-history-data>
+  </mat-tab>
+</mat-tab-group>

@@ -1,1 +1,5 @@
-<p>settings works!</p>
+<mat-tab-group dynamicHeight mat-align-tabs="center" >
+  <mat-tab *ngFor="let scale of scales" [label]="scale">
+    <app-settings-div scale="{{scale}}"></app-settings-div>
+  </mat-tab>
+</mat-tab-group>
