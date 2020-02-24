@@ -4,6 +4,6 @@
     </app-history-div>
     <p *ngIf="allData-history.length > 0">+{{allData-history.length}} available</p>
   </div>
-  <button *ngIf="allData-history.length > 0" (click)="fetchData(1)" id="showMoreButton" matRipple [matRippleColor]="'var(--secondaryRipple)'">
+  <button *ngIf="allData-history.length > 0" (click)="fetchData(10)" id="showMoreButton" matRipple [matRippleColor]="'var(--secondaryRipple)'">
     Show More...</button>
 </div>

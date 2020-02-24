@@ -3,6 +3,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Chart} from 'chart.js';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../shared/user.service';
+import {error} from 'util';
 
 @Component({
   selector: 'app-monitor',
@@ -26,17 +28,25 @@ export class MonitorComponent implements OnInit {
     humOut: 0,
     batt: 0,
     signal: 0,
+    date: ''
   };
+
+  invalidDate;
 
   constructor(private aut: AngularFireAuth,
               private db: AngularFirestore,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService) {
     if (aut.auth.currentUser != null) {
       this.updateScales();
     } else {
       this.router.navigate(['/login']);
     }
+
+    this.userService.getError().subscribe(errors => {
+      this.invalidDate = errors === this.getErrorWithDateMessage(this.selectedScale);
+    });
   }
 
   ngOnInit() {
@@ -173,6 +183,7 @@ export class MonitorComponent implements OnInit {
       humOut: data.humOut,
       batt: data.batt,
       signal: data.signal,
+      date: this.formatDate(data.time.toDate())
     };
   }
 
@@ -186,6 +197,7 @@ export class MonitorComponent implements OnInit {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           this.liveData = this.extractData(doc.data());
+          this.userService.updateError( this.hasIssueWithDate(doc) ? '' : this.getErrorWithDateMessage(this.selectedScale));
         });
       });
   }
@@ -238,7 +250,7 @@ export class MonitorComponent implements OnInit {
   }
 
   getYesterdayDate() {
-    return new Date(new Date().setDate(new Date().getDate() - 1));
+    return new Date(new Date().getDate() - 1);
   }
   getFormattedDate(date, currentDate) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -255,5 +267,39 @@ export class MonitorComponent implements OnInit {
     }
     return months[currentDate.getMonth()] + ' ' + currentDate.getDate() + ' ' + currentDate.getFullYear() + ' ' +
       '' + date.getHours() + ':' + minutes + ':' + seconds;
+  }
+
+  formatDate(date: Date): string {
+    let minutes: any = date.getMinutes();
+    let seconds: any = date.getSeconds();
+    let month: any = (date.getMonth() + 1);
+    let day: any = date.getDate();
+
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    return day + '/' + month + '/' + date.getFullYear() + ' ' +
+      '' + date.getHours() + ':' + minutes + ':' + seconds;
+  }
+
+  generateUniqueNumberForDate(date: Date) {
+    return date.getFullYear() + date.getMonth() + date.getDate();
+  }
+  hasIssueWithDate(doc) {
+    return this.generateUniqueNumberForDate(doc.data().time.toDate()) < this.generateUniqueNumberForDate(this.getYesterdayDate());
+  }
+
+  getErrorWithDateMessage(scale: string) {
+    return 'Warning! Seems like the scale(' + scale + ') didn\'t send data as expected! Resetting the scale is advised...';
   }
 }

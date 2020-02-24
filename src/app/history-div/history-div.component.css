@@ -42,7 +42,6 @@ mat-divider {
   color: var(--secondary);
   display: flex;
   flex-direction: row;
-  height: 25%;
 }
 .dataGroup div {
   height: 100%;

@@ -64,12 +64,25 @@ mat-divider {
 }
 
 #liveData {
-  height: 40vh;
   width: 40vw;
+  display: flex;
+  flex-direction: column;
 
   color: var(--secondary);
   border-radius: 10px;
   border: 1px solid var(--secondary);
+}
+#liveDate {
+  display: flex;
+  align-self: flex-end;
+}
+#liveDate > p {
+  padding: 0;
+  margin: 5px 5px 0 0;
+
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+  font-size: calc(5px + .8vw);
 }
 #monitorData {
   margin: 0;
@@ -97,7 +110,7 @@ mat-divider {
 .dataGroup {
   display: flex;
   flex-direction: row;
-  height: 25%;
+  margin-bottom: 5px;
 }
 .dataGroup div {
   height: 100%;
@@ -108,18 +121,18 @@ mat-divider {
   justify-content: center;
 }
 .dataGroup div svg {
-  width: calc(5px + 1.2vh + 1.2vw);
-  min-width: calc(5px + 1.2vh + 1.2vw);
+  width: calc(5px + 1.6vw);
+  min-width: calc(5px + 1.6vw);
   margin-left: 5px;
 
   fill: var(--secondary);
 }
 .dataGroup div span {
-  font-size: calc(5px + 1.2vh + 1.2vw);
+  font-size: calc(5px + 1.6vw);
   font-family: var(--secondaryFont);
 }
 .dataGroup div span:last-child {
-  font-size: calc(5px + .6vh + .6vw);
+  font-size: calc(5px + .8vw);
 }
 .dataGroup div div {
   display: flex;
@@ -128,7 +141,6 @@ mat-divider {
 
 @media only screen and (max-width: 700px) {
   #liveData {
-    height: 30vh;
     width: 80vw;
   }
   #monitorData {
@@ -143,14 +155,14 @@ mat-divider {
   }
 
   .dataGroup div svg {
-    width: calc(5px + 1.8vh + 1.8vw) !important;
-    min-width: calc(5px + 1.8vh + 1.8vw) !important;
+    width: calc(5px + 3.6vw);
+    min-width: calc(5px + 3.6vw);
   }
   .dataGroup div span {
-    font-size: calc(5px + 1.8vh + 1.8vw) !important;
+    font-size: calc(5px + 3.6vw);
   }
   .dataGroup div span:last-child {
-    font-size: calc(5px + .9vh + .9vw) !important;
+    font-size: calc(5px + 1.8vw);
   }
 }
 

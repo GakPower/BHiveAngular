@@ -14,6 +14,7 @@ export class UserService {
               private aut: AngularFireAuth) { }
 
   private signedIn = new Subject();
+  private error = new Subject();
 
   isSignedIn() {
     return this.signedIn;
@@ -22,21 +23,10 @@ export class UserService {
     this.signedIn.next(signedIn);
   }
 
-  createUser() {
-    console.log(this.aut.auth.currentUser.uid);
-    // return this.db.list('/users/').push({
-    //   gak : {
-    //     email : 'babooo',
-    //     password : 1234
-    //   }
-    // });
+  getError() {
+    return this.error;
   }
-
-  public boom(email) {
-    let one;
-    this.db.database.ref('/users/' + email).once('value').then((snapshot) => {
-      one = snapshot.exists();
-    });
-    console.log(one);
+  updateError(error: string) {
+    this.error.next(error);
   }
 }

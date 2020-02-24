@@ -1,93 +1,101 @@
+<div id="outerContainer">
 <div id="fullContainer">
-<div class="container">
-  <h1>Frequency</h1>
+  <div class="container">
+    <h1>Frequency</h1>
 
-  <div>
-    <mat-radio-group aria-label="Select an option" [selected]="transmissionElement === 0 ? half : (transmissionElement === 1 ? one : (transmissionElement === 2 ? two : custom))">
-      <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(half)">
-        <p>Every 1/2 hour</p>
-        <mat-radio-button value="0" #half [color]="'primary'" (click)="setTrans(half)"></mat-radio-button>
-      </div>
+    <div>
+      <mat-radio-group aria-label="Select an option" [selected]="transmissionElement === 0 ? half : (transmissionElement === 1 ? one : (transmissionElement === 2 ? two : custom))">
+        <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(half)">
+          <p>Every 1/2 hour</p>
+          <mat-radio-button value="0" #half [color]="'primary'" (click)="setTrans(half)"></mat-radio-button>
+        </div>
 
-      <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(one)">
-        <p>Every 1 hour</p>
-        <mat-radio-button value="1" #one [color]="'primary'" (click)="setTrans(one)"></mat-radio-button>
-      </div>
+        <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(one)">
+          <p>Every 1 hour</p>
+          <mat-radio-button value="1" #one [color]="'primary'" (click)="setTrans(one)"></mat-radio-button>
+        </div>
 
-      <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(two)">
-        <p>Every 2 hours</p>
-        <mat-radio-button value="2" #two [color]="'primary'" (click)="setTrans(two)"></mat-radio-button>
-      </div>
-      <div (click)="setTrans(custom)">
-        <mat-accordion>
-          <mat-expansion-panel class="mat-elevation-z0" [hideToggle]="true">
+        <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setTrans(two)">
+          <p>Every 2 hours</p>
+          <mat-radio-button value="2" #two [color]="'primary'" (click)="setTrans(two)"></mat-radio-button>
+        </div>
+        <div (click)="setTrans(custom)">
+          <mat-accordion>
+            <mat-expansion-panel class="mat-elevation-z0" [hideToggle]="true" [(expanded)]="expanded">
 
-            <mat-expansion-panel-header matRipple [matRippleColor]="'var(--secondaryRipple)'">
-              <mat-panel-title>
-                Custom Plan
-              </mat-panel-title>
-              <mat-panel-description>
-                <mat-radio-button value="3" #custom [color]="'primary'" (click)="setTrans(custom)"></mat-radio-button>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
+              <mat-expansion-panel-header matRipple [matRippleColor]="'var(--secondaryRipple)'">
+                <mat-panel-title>
+                  Custom Plan
+                </mat-panel-title>
+                <mat-panel-description>
+                  <mat-radio-button value="3" #custom [color]="'primary'" (click)="setTrans(custom)"></mat-radio-button>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
 
-            <mat-divider></mat-divider>
+              <mat-divider></mat-divider>
 
-            <div id="panelContent">
-              <button (click)="addTime()" matRipple [matRippleColor]="'var(--secondaryRipple)'">
-                <mat-icon>add</mat-icon>
-              </button>
+              <div id="panelContent">
+                <button (click)="addTime()" matRipple [matRippleColor]="'var(--secondaryRipple)'">
+                  <mat-icon>add</mat-icon>
+                </button>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Choose time</mat-label>
-                <input [(ngModel)]="time" [format]="24" readonly matInput [ngxTimepicker]="picker">
-                <ngx-material-timepicker-toggle matSuffix [for]="picker"></ngx-material-timepicker-toggle>
-                <ngx-material-timepicker [format]="24" [theme]="timePickerTheme" #picker></ngx-material-timepicker>
-                <mat-hint style="color: red; font-family: var(--secondaryFont)" *ngIf="hint">{{hint}}</mat-hint>
-              </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Choose time</mat-label>
+                  <input [(ngModel)]="time" [format]="24" readonly matInput [ngxTimepicker]="picker">
+                  <ngx-material-timepicker-toggle matSuffix [for]="picker"></ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker [format]="24" [theme]="timePickerTheme" #picker></ngx-material-timepicker>
+                  <mat-hint style="color: red; font-family: var(--secondaryFont)" *ngIf="hint">{{hint}}</mat-hint>
+                </mat-form-field>
 
-              <div id="timePlanList">
-                <div *ngFor="let time of customPlanList">
-                  <p>{{time}}</p>
-                  <button (click)="removeTime(time)" matRipple [matRippleColor]="'var(--secondaryRipple)'"><mat-icon>remove</mat-icon></button>
+                <div id="timePlanList">
+                  <div *ngFor="let time of customPlanList">
+                    <p>{{time}}</p>
+                    <button (click)="removeTime(time)" matRipple [matRippleColor]="'var(--secondaryRipple)'"><mat-icon>remove</mat-icon></button>
+                  </div>
+                  <p *ngIf="customPlanList.length === 0" [style.color]="isInvalid ? 'red' : secondaryDisabled">No time plan created</p>
                 </div>
-                <p *ngIf="customPlanList.length === 0" [style.color]="isInvalid ? 'red' : secondaryDisabled">No time plan created</p>
+
               </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-radio-group>
+<!--      <button (click)="applyTransmission()" matRipple [matRippleColor]="'var(&#45;&#45;secondaryRipple)'" [disabled]="freqDisabled">Apply</button>-->
+    </div>
+  </div>
 
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
+  <div class="container">
+    <h1>Power</h1>
+
+    <div class="description">
+      <div>
+        <span>Always On:</span><mat-icon matTooltipShowDelay="300" matTooltipClass="tooltip" matTooltip="The scale will remain on all the time. The benefits from this option is that you can request information from the scale whenever you want">info</mat-icon><br>
+        <p [style.color]="positive">Better accessibility</p>
+        <p [style.color]="negative">More power consumption</p>
       </div>
-    </mat-radio-group>
-    <button (click)="applyTransmission()" matRipple [matRippleColor]="'var(--secondaryRipple)'" [disabled]="freqDisabled">Apply</button>
+      <div>
+        <span>Limited:</span><mat-icon matTooltipShowDelay="300" matTooltipClass="tooltip" matTooltip="The scale will only be on during the transmission process. By selecting this option you spend less energy and the scale will operate longer">info</mat-icon><br>
+        <p [style.color]="negative">Worse accessibility</p>
+        <p [style.color]="positive">Less power consumption</p>
+      </div>
+
+    </div>
+
+
+    <div>
+      <mat-radio-group aria-label="Select an option" [selected]="powerElement === 0 ? always : only">
+        <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setPower(always)">
+          <p>Always On</p>
+          <mat-radio-button value="0" #always [color]="'primary'" (click)="setPower(always)"></mat-radio-button>
+        </div>
+
+        <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setPower(only)">
+          <p>Limited</p>
+          <mat-radio-button value="1" #only [color]="'primary'" (click)="setPower(only)"></mat-radio-button>
+        </div>
+      </mat-radio-group>
+    </div>
   </div>
 </div>
-
-<div class="container">
-  <h1>Power</h1>
-
-  <p><span>Always On:</span><mat-icon matTooltipShowDelay="300" matTooltipClass="tooltip" matTooltip="The scale will remain on all the time. The benefits from this option is that you can request information from the scale whenever you want">info</mat-icon><br>
-    <span name="positive">Better accessibility</span><br>
-    <span name="negative">Less operation time</span>
-  </p>
-  <p><span>Limited:</span><mat-icon matTooltipShowDelay="300" matTooltipClass="tooltip" matTooltip="The scale will only be on during the transmission process. By selecting this option you spend less energy and the scale will operate longer">info</mat-icon><br>
-    <span name="negative">Worse accessibility</span><br>
-    <span name="positive">More operation time</span>
-  </p>
-
-  <div>
-    <mat-radio-group aria-label="Select an option" [selected]="powerElement === 0 ? always : only">
-      <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setPower(always)">
-        <p>Always On</p>
-        <mat-radio-button value="0" #always [color]="'primary'" (click)="setPower(always)"></mat-radio-button>
-      </div>
-
-      <div matRipple [matRippleColor]="'var(--secondaryRipple)'" (click)="setPower(only)">
-        <p>Limited</p>
-        <mat-radio-button value="1" #only [color]="'primary'" (click)="setPower(only)"></mat-radio-button>
-      </div>
-    </mat-radio-group>
-    <button (click)="applyPower()" matRipple [matRippleColor]="'var(--secondaryRipple)'" [disabled]="powerDisabled">Apply</button>
-  </div>
-</div>
+<button id="apply" (click)="apply()" matRipple [matRippleColor]="'var(--secondaryRipple)'" [disabled]="disabled">Apply</button>
 </div>

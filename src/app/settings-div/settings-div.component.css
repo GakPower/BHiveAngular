@@ -49,12 +49,21 @@ ngx-material-timepicker-toggle {
   fill: var(--secondary)
 }
 mat-icon {
-  width: 5px;
-  min-width: 5px;
-  height: 5px;
-  min-height: 5px;
-  font-size: 1rem;
+  width: 1.3rem;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  min-height: 1.3rem;
+  font-size: 1.3rem;
   color: var(--secondary);
+}
+
+#outerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
 }
 
 #fullContainer {
@@ -90,30 +99,14 @@ mat-icon {
 
   text-align: center;
 }
-.container > p {
-  color: var(--tertiary);
-  font-size: 1rem;
-  font: var(--secondaryFont);
-  padding: 10px;
-}
-.container > p > span {
-  color: var(--secondary);
-  font-size: 1.2rem;
-}
-.container > p > span[name= positive] {
-  color: var(--positive);
-  font-size: 1.05rem;
-}
-.container > p > span[name= negative] {
-  color: var(--negative);
-  font-size: 1.05rem;
-}
 .container > div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 80%;
+
+  padding-bottom: 20px;
 }
 .container > div > mat-radio-group {
   width: 100%;
@@ -133,7 +126,28 @@ mat-icon {
   color: var(--tertiary);
   font-family: var(--secondaryFont);
 }
-.container > div > button {
+.description {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.description > div {
+  color: var(--tertiary);
+  font-size: 1rem;
+  font: var(--secondaryFont);
+  padding: 10px;
+}
+.description > div > span {
+  color: var(--secondary);
+  font-family: var(--secondaryFont);
+  font-size: 1.2rem;
+}
+.description > div > p {
+  font-family: var(--secondaryFont);
+  font-size: 1.05rem;
+}
+
+#apply {
   margin: 20px 10px 20px 0;
   padding: 10px;
 
@@ -149,11 +163,11 @@ mat-icon {
 
   transition: background-color 300ms;
 }
-.container > div > button:hover,
-.container > div > button:focus {
+#apply:hover,
+#apply:focus {
   background-color: var(--secondaryHover);
 }
-.container > div > button:disabled {
+#apply:disabled {
   background-color: var(--primary);
   border: 1px solid var(--secondaryDisabled);
   color: var(--secondaryDisabled);
@@ -231,6 +245,8 @@ mat-icon {
 .mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title,
 .mat-expansion-panel-header .mat-expansion-panel-header-title {
   color: var(--tertiary);
+
+  cursor: pointer;
 }
 .mat-expansion-panel-header-description {
   min-height: 40px;

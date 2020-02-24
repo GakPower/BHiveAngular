@@ -11,6 +11,8 @@
   --tertiaryHighlight: rgba(248, 245, 240, 0.25);
   --positive: #3d8900;
   --negative: #c53200;
+  --negativeHover: rgba(255, 51, 0, 0.25);
+  --negativeRipple: rgba(255, 51, 0, 0.45);
 
   --primaryFont: 'Viga', sans-serif;
   --secondaryFont: 'Josefin Sans', sans-serif;
@@ -191,4 +193,49 @@ header p {
   font-size: 1rem;
 
   transition: color 500ms;
+}
+
+#errorBar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100vw - 17px);
+  height: 60px;
+  z-index: 100;
+
+  background-color: var(--negative);
+  border-radius: 0 0 15px 15px;
+
+  transition: top ease 300ms;
+}
+#errorBar p {
+  margin-left: 20px;
+
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+  font-size: 1.2rem;
+}
+#errorBar button {
+  margin-right: 20px;
+  padding: 0;
+
+  width: 35px;
+  height: 35px;
+
+  background-color: var(--negative);
+  border-radius: 10px;
+  border: 1px solid var(--negativeRipple);
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+#errorBar button:hover {
+  background-color: var(--negativeHover);
+}
+
+#errorBar button mat-icon {
+  color: var(--tertiary);
 }

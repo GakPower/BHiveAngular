@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { UserService } from './shared/user.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {fromEvent} from 'rxjs';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -17,6 +18,7 @@ export class AppComponent {
   animateContacts = false;
   public signedIn;
   color = 'rgba(255, 172, 29, 0.25)';
+  error: unknown = '';
 
   async scrollToBottom() {
     scrollTo(0, document.body.scrollHeight);
@@ -35,5 +37,14 @@ export class AppComponent {
     this.userService.isSignedIn().subscribe(isSigned => {
       this.signedIn = isSigned;
     });
+
+    this.userService.getError().subscribe(errors => {
+      this.error = errors;
+    });
   }
+
+  hideError() {
+    this.userService.updateError('');
+  }
+
 }

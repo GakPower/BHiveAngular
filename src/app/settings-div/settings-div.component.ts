@@ -4,6 +4,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Swal from 'sweetalert2';
 import {MatRadioButton} from '@angular/material';
+// import { firestore } from 'firebase';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-settings-div',
@@ -18,6 +20,8 @@ export class SettingsDivComponent implements OnInit {
   secondaryDisabled = getComputedStyle(document.documentElement).getPropertyValue('--secondaryDisabled');
   tertiary = getComputedStyle(document.documentElement).getPropertyValue('--tertiary');
   font = getComputedStyle(document.documentElement).getPropertyValue('--secondaryFont');
+  positive = getComputedStyle(document.documentElement).getPropertyValue('--positive');
+  negative = getComputedStyle(document.documentElement).getPropertyValue('--negative');
 
   timePickerTheme: NgxMaterialTimepickerTheme = {
     container: {
@@ -42,18 +46,17 @@ export class SettingsDivComponent implements OnInit {
   hint = '';
   transmissionElement: number;
   isInvalid = false;
-  freqDisabled = false;
-  powerDisabled = false;
+  disabled = false;
 
   powerElement: number;
+
+  expanded: boolean;
 
   constructor(private db: AngularFirestore,
               private aut: AngularFireAuth) {
   }
 
   ngOnInit() {
-    this.transmissionElement = 1;
-    this.powerElement = 1;
     this.getFrequencyOption();
     this.getPower();
   }
@@ -63,6 +66,7 @@ export class SettingsDivComponent implements OnInit {
     if (!this.time) {
       this.hint = 'No time selected';
     } else if (this.customPlanList.indexOf(this.time) !== -1) {
+      this.isInvalid = false;
       this.hint = 'Selected time is already part of the plan';
     } else {
       this.customPlanList.push(this.time);
@@ -70,6 +74,7 @@ export class SettingsDivComponent implements OnInit {
         return Number(x.replace(':', '')) - Number(y.replace(':', ''));
       });
       this.time = '';
+      this.isInvalid = false;
     }
   }
   removeTime(time) {
@@ -80,28 +85,15 @@ export class SettingsDivComponent implements OnInit {
     this.time = '';
   }
 
-  applyTransmission() {
-    this.freqDisabled = true;
-    setTimeout(() => {
-      if (this.transmissionElement === 3 && this.customPlanList.length === 0) {
-        this.isInvalid = true;
-        this.freqDisabled = false;
-      } else {
-        Swal.fire(
-          'Applied!',
-          'The setting about the frequency are changed successfully!',
-          'success'
-        ).then(() => {
-          this.isInvalid = false;
-          this.freqDisabled = false;
-        });
-      }
-    }, 500);
-  }
+  setTrans(element: MatRadioButton | number) {
+    if (typeof element === 'object') {
+      element.checked = true;
+      this.transmissionElement = Number(element.value);
 
-  setTrans(element: MatRadioButton) {
-    element.checked = true;
-    this.transmissionElement = Number(element.value);
+      this.expanded = element.value === '3';
+    } else if (typeof element === 'number') {
+      this.transmissionElement = element;
+    }
   }
 
   getFrequencyOption() {
@@ -109,7 +101,7 @@ export class SettingsDivComponent implements OnInit {
       .doc(this.aut.auth.currentUser.uid)
       .get().then((doc) => {
       const frequency = doc.data().scales.find(x => x.name === this.scale).freq;
-      this.transmissionElement = frequency.type;
+      this.setTrans(frequency.type);
       this.customPlanList = frequency.plan.map(x => this.getTimeString(x.toDate()));
     });
   }
@@ -118,9 +110,13 @@ export class SettingsDivComponent implements OnInit {
     return date.getHours() + ':' + date.getMinutes();
   }
 
-  setPower(element: MatRadioButton) {
-    element.checked = true;
-    this.powerElement = Number(element.value);
+  setPower(element: MatRadioButton | number) {
+    if (typeof element === 'object') {
+      element.checked = true;
+      this.powerElement = Number(element.value);
+    } else if (typeof element === 'number') {
+      this.powerElement = element;
+    }
   }
 
   getPower() {
@@ -131,16 +127,47 @@ export class SettingsDivComponent implements OnInit {
     });
   }
 
-  applyPower() {
-    this.powerDisabled = true;
+  apply() {
+    this.disabled = true;
     setTimeout(() => {
-      Swal.fire(
-        'Applied!',
-        'The setting about the power are changed successfully!',
-        'success'
-      ).then(() => {
-        this.powerDisabled = false;
-      });
+      if (this.transmissionElement === 3 && this.customPlanList.length === 0) {
+        this.isInvalid = true;
+        this.disabled = false;
+        Swal.fire(
+          'Error!',
+          'Frequency custom plan is empty!',
+          'error'
+        );
+      } else {
+        this.db.firestore.collection('users')
+          .doc(this.aut.auth.currentUser.uid).get().then(doc => {
+          const scales = doc.data().scales.map(x => {
+            if (x.name === this.scale) {
+              x.freq.plan = this.customPlanList.map(plan => {
+                const splittedTime = plan.split(':');
+                const newDate = new Date(new Date().setHours(Number(splittedTime[0]), Number(splittedTime[1]), 0, 0));
+                return firebase.firestore.Timestamp.fromDate(newDate);
+              });
+              x.freq.type = this.transmissionElement;
+              x.power = this.powerElement;
+            }
+            return x;
+          });
+
+          this.db.firestore.collection('users')
+            .doc(this.aut.auth.currentUser.uid).set({
+            scales
+          }).then(() => {
+            this.isInvalid = false;
+            this.disabled = false;
+            Swal.fire(
+              'Applied!',
+              'Settings have been changed successfully!',
+              'success'
+            );
+          });
+        });
+      }
     }, 500);
   }
 }
