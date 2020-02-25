@@ -28,9 +28,28 @@
   font-size: 1.1rem;
 }
 
-.tooltip {
+::ng-deep .tooltip {
   font-size: 1rem;
   font-family: var(--secondaryFont);
   background-color: var(--primaryRipple);
   white-space: pre-line;
+}
+
+#charts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+#charts > div {
+  width: 45vw;
+  height: 45vh;
+
+  border-radius: 15px;
+  border: 1px solid var(--secondaryRipple);
+
+  padding: 0 10px 0 10px;
+  margin: 0 20px 20px 0;
 }

@@ -4,7 +4,6 @@ import {Chart} from 'chart.js';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../shared/user.service';
-import {error} from 'util';
 
 @Component({
   selector: 'app-monitor',
@@ -93,7 +92,7 @@ export class MonitorComponent implements OnInit {
         responsive: true,
         maintainAspectRatio: false,
         title: {
-          text: 'Weight During Day',
+          text: 'Weight Difference During Day',
           display: true,
           fontColor: 'white',
           fontSize: 18
