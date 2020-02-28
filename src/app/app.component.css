@@ -52,6 +52,7 @@ header p {
 }
 #mainContent {
   padding-top: 5vh;
+  margin-bottom: 20px;
 
   display: flex;
   align-items: center;
@@ -195,7 +196,7 @@ header p {
   transition: color 500ms;
 }
 
-#errorBar {
+#bar {
   position: fixed;
   display: flex;
   align-items: center;
@@ -210,14 +211,14 @@ header p {
 
   transition: top ease 300ms;
 }
-#errorBar p {
+#bar p {
   margin-left: 20px;
 
   color: var(--tertiary);
   font-family: var(--secondaryFont);
   font-size: 1.2rem;
 }
-#errorBar button {
+#bar button {
   margin-right: 20px;
   padding: 0;
 
@@ -232,10 +233,10 @@ header p {
 
   transition: background-color 300ms;
 }
-#errorBar button:hover {
+#bar button:hover {
   background-color: var(--negativeHover);
 }
 
-#errorBar button mat-icon {
+#bar button mat-icon {
   color: var(--tertiary);
 }

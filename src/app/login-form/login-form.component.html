@@ -13,17 +13,17 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput [type]="type" [formControl]="passForm" (keyup.enter)="onSubmit()" appAutoFocus="10">
+      <input matInput [type]="typePassField" [formControl]="passForm" (keyup.enter)="onSubmit()" appAutoFocus="10">
       <button mat-button matSuffix mat-icon-button *ngIf="passForm.value" (click)="showHide()">
-        <mat-icon *ngIf="show">visibility_on</mat-icon>
-        <mat-icon *ngIf="!show">visibility_off</mat-icon>
+        <mat-icon *ngIf="showPassField">visibility_on</mat-icon>
+        <mat-icon *ngIf="!showPassField">visibility_off</mat-icon>
       </button>
 
       <mat-error *ngIf="passForm.hasError('empty') ||
         passForm.hasError('wrongComb')">{{passErrorText}}</mat-error>
     </mat-form-field>
 
-    <a routerLink="/forgotPass">Forgot Password?</a>
+    <button matRipple [matRippleColor]="'var(--secondaryRipple)'" routerLink="/forgotPass">Forgot Password?</button>
 
   </div>
   <button (click)="onSubmit()" [disabled]="disabled" matRipple [matRippleColor]="'var(--secondaryRipple)'">Login</button>

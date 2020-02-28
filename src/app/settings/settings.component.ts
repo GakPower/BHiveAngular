@@ -6,8 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
 

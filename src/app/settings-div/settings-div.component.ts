@@ -4,7 +4,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Swal from 'sweetalert2';
 import {MatRadioButton} from '@angular/material';
-// import { firestore } from 'firebase';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -44,23 +43,49 @@ export class SettingsDivComponent implements OnInit {
   customPlanList = [];
   time;
   hint = '';
-  transmissionElement: number;
-  isInvalid = false;
-  disabled = false;
 
+  transmissionElement: number;
   powerElement: number;
 
   expanded: boolean;
+  isInvalid = false;
+  disabled = true;
+
+  defaultTrans;
+  defaultPower;
 
   constructor(private db: AngularFirestore,
               private aut: AngularFireAuth) {
   }
 
   ngOnInit() {
-    this.getFrequencyOption();
-    this.getPower();
+    this.getTransOptions();
+    this.getPowerOptions();
   }
+  getTransOptions() {
+    this.db.firestore.collection('users')
+      .doc(this.aut.auth.currentUser.uid)
+      .get().then((doc) => {
+        const frequency = doc.data().scales.find(x => x.name === this.scale).freq;
+        this.setTransOptions(frequency.type);
+        this.customPlanList = frequency.plan.map(x => this.getTimeString(x.toDate()));
+        this.defaultTrans = frequency.type;
+    });
+  }
+  setTransOptions(element: MatRadioButton | number) {
+    if (typeof element === 'object' && this.transmissionElement !== Number(element.value)) {
+      element.checked = true;
+      this.transmissionElement = Number(element.value);
 
+      this.expanded = element.value === '3';
+      this.disabled = false;
+    } else if (typeof element === 'number') {
+      this.transmissionElement = element;
+    }
+  }
+  getTimeString(date: Date) {
+    return date.getHours() + ':' + date.getMinutes();
+  }
   addTime() {
     this.hint = '';
     if (!this.time) {
@@ -75,56 +100,34 @@ export class SettingsDivComponent implements OnInit {
       });
       this.time = '';
       this.isInvalid = false;
+      this.disabled = false;
     }
   }
   removeTime(time) {
     const index = this.customPlanList.indexOf(time);
     if (index > -1) {
       this.customPlanList.splice(index, 1);
+      this.disabled = false;
     }
     this.time = '';
   }
 
-  setTrans(element: MatRadioButton | number) {
-    if (typeof element === 'object') {
-      element.checked = true;
-      this.transmissionElement = Number(element.value);
-
-      this.expanded = element.value === '3';
-    } else if (typeof element === 'number') {
-      this.transmissionElement = element;
-    }
-  }
-
-  getFrequencyOption() {
+  getPowerOptions() {
     this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
       .get().then((doc) => {
-      const frequency = doc.data().scales.find(x => x.name === this.scale).freq;
-      this.setTrans(frequency.type);
-      this.customPlanList = frequency.plan.map(x => this.getTimeString(x.toDate()));
+        this.powerElement = doc.data().scales.find(x => x.name === this.scale).power;
+        this.defaultPower = this.powerElement;
     });
   }
-
-  getTimeString(date: Date) {
-    return date.getHours() + ':' + date.getMinutes();
-  }
-
-  setPower(element: MatRadioButton | number) {
-    if (typeof element === 'object') {
+  setPowerOptions(element: MatRadioButton | number) {
+    if (typeof element === 'object' && this.powerElement !== Number(element.value)) {
       element.checked = true;
       this.powerElement = Number(element.value);
+      this.disabled = false;
     } else if (typeof element === 'number') {
       this.powerElement = element;
     }
-  }
-
-  getPower() {
-    this.db.firestore.collection('users')
-      .doc(this.aut.auth.currentUser.uid)
-      .get().then((doc) => {
-      this.powerElement = doc.data().scales.find(x => x.name === this.scale).power;
-    });
   }
 
   apply() {
@@ -150,6 +153,9 @@ export class SettingsDivComponent implements OnInit {
               });
               x.freq.type = this.transmissionElement;
               x.power = this.powerElement;
+
+              this.defaultTrans = this.transmissionElement;
+              this.defaultPower = this.powerElement;
             }
             return x;
           });

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from '../shared/user.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
@@ -10,13 +9,13 @@ import {FormControl} from '@angular/forms';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
-  public emailForm = new FormControl('');
-  public passForm = new FormControl('');
-  public show = false;
-  public type = 'password';
-  public signedIn;
+  emailForm = new FormControl('');
+  passForm = new FormControl('');
+  showPassField = false;
+  typePassField = 'password';
+  signedIn;
   emailErrorText = '';
   passErrorText = '';
   disabled = false;
@@ -33,12 +32,9 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   showHide() {
-    this.show = !this.show;
-    this.type = this.show ? 'text' : 'password';
+    this.showPassField = !this.showPassField;
+    this.typePassField = this.showPassField ? 'text' : 'password';
   }
   onSubmit() {
     this.disabled = true;
@@ -70,6 +66,6 @@ export class LoginFormComponent implements OnInit {
         }
         this.disabled = false;
       }));
-    }, 1000);
+    }, 500);
   }
 }

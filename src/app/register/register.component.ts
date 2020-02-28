@@ -8,7 +8,7 @@ import {UserService} from '../shared/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   constructor(private aut: AngularFireAuth,
               private router: Router,
@@ -19,11 +19,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
-
   openInNewTab(url) {
     window.open(url, '_blank').focus();
   }
-
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
@@ -6,12 +6,10 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./history.component.css']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent {
 
-  scalesUnsubscribe;
   scales = [];
 
   constructor(private db: AngularFirestore,
@@ -20,14 +18,11 @@ export class HistoryComponent implements OnInit {
     if (aut.auth.currentUser == null) {
       this.router.navigate(['/login']);
     }
-    this.scalesUnsubscribe = this.db.firestore.collection('users')
+    this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
-      .onSnapshot((doc) => {
+      .get().then((doc) => {
         this.scales = doc.data().scales.map(x => x.name);
       });
-  }
-
-  ngOnInit() {
   }
 
 }

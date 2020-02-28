@@ -9,6 +9,7 @@ export class HistoryDivComponent implements OnInit {
 
   @Input() data: object;
   @Input() latest = true;
+
   date;
 
   diff = '';

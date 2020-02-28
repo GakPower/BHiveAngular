@@ -2,26 +2,10 @@
   user-select: none;
   outline: none;
 }
-
 h1 {
   color: var(--secondary);
   font-size: 2.5rem;
   font-family: var(--primaryFont);
-}
-
-a {
-  align-self: end;
-
-  font-family: var(--secondaryFont);
-  color: var(--secondary);
-  text-decoration: none;
-  caret-color: transparent;
-
-  cursor: pointer;
-}
-a:hover,
-a:focus {
-  text-decoration: underline var(--secondary);
 }
 
 #loginForm {
@@ -29,20 +13,14 @@ a:focus {
   flex-direction: column;
   align-items: center;
 
-  margin: 0;
-
   width: 25vw;
-  height: 50vh;
-  min-height: 400px;
-  min-width: 400px;
+  padding-bottom: 20px;
 
   border: 1px solid var(--secondary);
   border-radius: 10px;
-
-  text-align: center;
 }
 #loginForm > button {
-  margin-top: 15px;
+  margin-top: 25px;
 
   min-width: 150px;
   height: 50px;
@@ -94,6 +72,28 @@ a:focus {
 #forms mat-form-field mat-icon {
   vertical-align: middle;
   color: var(--tertiary);
+}
+#forms > button {
+  align-self: end;
+  padding: 8px;
+
+  font-size: .9rem;
+  font-family: var(--secondaryFont);
+  color: var(--secondary);
+  text-decoration: none;
+  caret-color: transparent;
+
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+#forms > button:hover,
+#forms > button:focus {
+  background-color: var(--secondaryHover);
 }
 
 /*//input outline color*/

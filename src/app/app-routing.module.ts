@@ -10,14 +10,14 @@ import {HistoryComponent} from './history/history.component';
 import {SettingsComponent} from './settings/settings.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginFormComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'monitor', component: MonitorComponent},
-  { path: 'forgotPass', component: ForgotPassComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'stats', component: StatsComponent},
-  { path: 'history', component: HistoryComponent},
-  { path: 'settings', component: SettingsComponent},
+  { path: 'login', component: LoginFormComponent, data: {animation: 'Login'} },
+  { path: 'register', component: RegisterComponent, data: {animation: 'Register'} },
+  { path: 'monitor', component: MonitorComponent, data: {animation: 'Monitor'} },
+  { path: 'forgotPass', component: ForgotPassComponent, data: {animation: 'ForgotPass'} },
+  { path: 'profile', component: ProfileComponent, data: {animation: 'Profile'} },
+  { path: 'stats', component: StatsComponent, data: {animation: 'Stats'} },
+  { path: 'history', component: HistoryComponent, data: {animation: 'History'} },
+  { path: 'settings', component: SettingsComponent, data: {animation: 'Settings'} },
 ];
 
 @NgModule({

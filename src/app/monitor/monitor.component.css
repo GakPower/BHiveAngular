@@ -4,26 +4,23 @@ h1 {
   font-family: var(--primaryFont);
 }
 mat-divider {
-  width: 0;
-  height: 50%;
-  align-self: center;
+  display: block;
+  margin: 0;
+  border-right: 1px solid var(--secondaryRipple)
+}
 
-  background-color: var(--secondary);
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #selectRec {
   display: flex;
-  margin-left: 50%;
-  transform: translateX(-50%);
-
-  width: 30vw;
-  min-width: 200px;
-
-  text-align: start;
 }
 #selectRec mat-form-field {
   width: 30vw;
-  min-width: 200px;
 }
 #selectRec button {
   display: flex;
@@ -49,13 +46,7 @@ mat-divider {
   background-color: var(--secondaryHover);
 }
 #selectRec button .mat-icon {
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  margin-left: 2px;
-
   color: var(--secondary);
-  font-size: 1.2rem;
 
   transition: transform 500ms;
 }
@@ -98,7 +89,8 @@ mat-divider {
 #lineChartContainer {
   position: relative;
   margin-left: 1vw;
-  padding-right: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
 
   height: 70vh;
   width: 64vw;
@@ -109,11 +101,9 @@ mat-divider {
 
 .dataGroup {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .dataGroup div {
-  height: 100%;
   width: 80%;
   display: flex;
   flex-direction: row;

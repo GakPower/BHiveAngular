@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import { UserService } from './shared/user.service';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {fromEvent} from 'rxjs';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -14,19 +13,13 @@ function sleep(ms) {
 })
 export class AppComponent {
   title = 'BHive';
-  public fixed = false;
+  fixed = false;
   animateContacts = false;
-  public signedIn;
-  color = 'rgba(255, 172, 29, 0.25)';
-  error: unknown = '';
+  signedIn;
+  secondaryRipple = getComputedStyle(document.documentElement).getPropertyValue('--secondaryRipple');
+  barText: unknown = '';
+  barColor: unknown = '';
 
-  async scrollToBottom() {
-    scrollTo(0, document.body.scrollHeight);
-    await sleep(500);
-    this.animateContacts = !this.animateContacts;
-    await sleep(700);
-    this.animateContacts = !this.animateContacts;
-  }
   constructor(private userService: UserService,
               private aut: AngularFireAuth) {
     aut.auth.signOut();
@@ -38,13 +31,23 @@ export class AppComponent {
       this.signedIn = isSigned;
     });
 
-    this.userService.getError().subscribe(errors => {
-      this.error = errors;
+    this.userService.getBarText().subscribe(barText => {
+      this.barText = barText;
+    });
+    this.userService.getBarColor().subscribe(barColor => {
+      this.barColor = barColor;
     });
   }
 
-  hideError() {
-    this.userService.updateError('');
+  async scrollToBottom() {
+    scrollTo(0, document.body.scrollHeight);
+    await sleep(500);
+    this.animateContacts = !this.animateContacts;
+    await sleep(700);
+    this.animateContacts = !this.animateContacts;
   }
 
+  hideBar() {
+    this.userService.updateBarText('');
+  }
 }

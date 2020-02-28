@@ -16,6 +16,9 @@ export class MonitorComponent implements OnInit {
   LineChart: Chart = [];
   primary = getComputedStyle(document.documentElement).getPropertyValue('--primary');
   secondary = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
+  tertiary = getComputedStyle(document.documentElement).getPropertyValue('--tertiary');
+  secondaryFont = getComputedStyle(document.documentElement).getPropertyValue('--secondaryFont');
+  negative = getComputedStyle(document.documentElement).getPropertyValue('--negative');
   selectedScale;
 
   liveData = {
@@ -30,7 +33,7 @@ export class MonitorComponent implements OnInit {
     date: ''
   };
 
-  invalidDate;
+  invalidDate: boolean;
 
   constructor(private aut: AngularFireAuth,
               private db: AngularFirestore,
@@ -38,14 +41,32 @@ export class MonitorComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private userService: UserService) {
     if (aut.auth.currentUser != null) {
-      this.updateScales();
+      this.getScales();
     } else {
       this.router.navigate(['/login']);
     }
 
-    this.userService.getError().subscribe(errors => {
+    this.userService.getBarText().subscribe(errors => {
       this.invalidDate = errors === this.getErrorWithDateMessage(this.selectedScale);
     });
+  }
+  getScales() {
+    this.db.firestore.collection('users')
+      .doc(this.aut.auth.currentUser.uid)
+      .get().then((doc) => {
+      this.activatedRoute.params.subscribe(params => {
+        this.scales = doc.data().scales.map(x => x.name);
+        if (params.s != null && this.scales.includes(params.s)) {
+          this.selectedScale = params.s;
+        } else if (this.scales.length > 0) {
+          this.selectedScale = this.scales[0];
+        }
+        this.updateScaleData();
+      });
+    });
+  }
+  getErrorWithDateMessage(scale: string) {
+    return 'Warning! Seems like the scale(' + scale + ') didn\'t send data as expected! Resetting the scale is advised...';
   }
 
   ngOnInit() {
@@ -64,7 +85,7 @@ export class MonitorComponent implements OnInit {
           label: 'Yesterday',
           fill: false,
           lineTension: .2,
-          borderColor: 'rgb(153,153,153)',
+          borderColor: '#00dd94',
           borderWidth: 4
         }]
       },
@@ -85,21 +106,27 @@ export class MonitorComponent implements OnInit {
           bodyFontSize: 15,
           backgroundColor: this.primary,
           titleFontColor: this.secondary,
+          titleFontFamily: this.secondaryFont,
           bodyFontColor: this.secondary,
+          bodyFontFamily: this.secondaryFont,
           borderColor: this.secondary,
           borderWidth: 1
         },
         responsive: true,
         maintainAspectRatio: false,
         title: {
-          text: 'Weight Difference During Day',
+          text: 'Weight Difference During The Day',
           display: true,
-          fontColor: 'white',
+          fontColor: this.tertiary,
+          fontFamily: this.secondaryFont,
+          fontStyle: 'normal',
           fontSize: 18
         },
         legend: {
           labels: {
-            fontColor: 'white',
+            fontColor: this.tertiary,
+            fontFamily: this.secondaryFont,
+            fontStyle: 'normal',
             fontSize: 15
           }
         },
@@ -113,12 +140,15 @@ export class MonitorComponent implements OnInit {
               display: true,
               labelString: 'Weight',
               fontColor: this.secondary,
-              fontStyle: 'bold',
-              fontSize: 18
+              fontFamily: this.secondaryFont,
+              fontStyle: 'normal',
+              fontSize: 20
             },
             ticks: {
               beginAtZero: true,
-              fontColor: 'white',
+              fontColor: this.tertiary,
+              fontFamily: this.secondaryFont,
+              fontStyle: 'normal',
               fontSize: 13
             }
           }],
@@ -131,8 +161,9 @@ export class MonitorComponent implements OnInit {
               display: true,
               labelString: 'Time',
               fontColor: this.secondary,
-              fontStyle: 'bold',
-              fontSize: 18
+              fontFamily: this.secondaryFont,
+              fontStyle: 'normal',
+              fontSize: 20
             },
             type: 'time',
             time: {
@@ -143,113 +174,15 @@ export class MonitorComponent implements OnInit {
             distribution: 'series',
             ticks: {
               beginAtZero: true,
-              fontColor: 'white',
+              fontColor: this.tertiary,
+              fontFamily: this.secondaryFont,
+              fontStyle: 'normal',
               fontSize: 13
             }
           }]
         }
       }
     });
-  }
-  updateScaleData() {
-    this.updateLiveData();
-    this.updateChartData();
-  }
-
-  updateScales() {
-    this.db.firestore.collection('users')
-      .doc(this.aut.auth.currentUser.uid)
-      .get().then((doc) => {
-        this.activatedRoute.params.subscribe(params => {
-          this.scales = doc.data().scales.map(x => x.name);
-          if (params.s != null && this.scales.includes(params.s)) {
-            this.selectedScale = params.s;
-          } else if (this.scales.length > 0) {
-            this.selectedScale = this.scales[0];
-          }
-          this.updateScaleData();
-        });
-      });
-  }
-
-  extractData(data) {
-    return {
-      weight: data.weight,
-      diff: data.diff > 0 ? '+' + data.diff : data.diff,
-      tempIn: data.tempIn,
-      humIn: data.humIn,
-      tempOut: data.tempOut,
-      humOut: data.humOut,
-      batt: data.batt,
-      signal: data.signal,
-      date: this.formatDate(data.time.toDate())
-    };
-  }
-
-  updateLiveData() {
-    this.db.firestore.collection('scales')
-      .doc(this.aut.auth.currentUser.uid)
-      .collection(this.selectedScale)
-      .orderBy('time', 'desc')
-      .limit(1)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.liveData = this.extractData(doc.data());
-          this.userService.updateError( this.hasIssueWithDate(doc) ? '' : this.getErrorWithDateMessage(this.selectedScale));
-        });
-      });
-  }
-  updateTodayWeight() {
-    this.LineChart.data.datasets[0].data = [];
-    const lastDay = new Date(Date.now()).getDate();
-    this.db.firestore.collection('scales')
-      .doc(this.aut.auth.currentUser.uid)
-      .collection(this.selectedScale)
-      .orderBy('time', 'desc')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const date = doc.data().time.toDate();
-          if (lastDay === date.getDate()) {
-            this.LineChart.data.datasets[0].data.push({t: new Date(0, 0, 0,
-                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
-            this.LineChart.update();
-          } else {
-            return true;
-          }
-      });
-    });
-  }
-  updateYesterdayWeight() {
-    this.LineChart.data.datasets[1].data = [];
-    const lastDay = this.getYesterdayDate().getDate();
-    this.db.firestore.collection('scales')
-      .doc(this.aut.auth.currentUser.uid)
-      .collection(this.selectedScale)
-      .orderBy('time', 'desc')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const date = doc.data().time.toDate();
-          if (date.getDate() === lastDay) {
-            this.LineChart.data.datasets[1].data.push({t: new Date(0, 0, 0,
-                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
-            this.LineChart.update();
-          } else if (date.getDate() < lastDay) {
-            return true;
-          }
-        });
-      });
-  }
-
-  updateChartData() {
-    this.updateTodayWeight();
-    this.updateYesterdayWeight();
-  }
-
-  getYesterdayDate() {
-    return new Date(new Date().getDate() - 1);
   }
   getFormattedDate(date, currentDate) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -268,6 +201,38 @@ export class MonitorComponent implements OnInit {
       '' + date.getHours() + ':' + minutes + ':' + seconds;
   }
 
+  updateScaleData() {
+    this.updateLiveData();
+    this.updateChartData();
+  }
+  updateLiveData() {
+    this.db.firestore.collection('scales')
+      .doc(this.aut.auth.currentUser.uid)
+      .collection(this.selectedScale)
+      .orderBy('time', 'desc')
+      .limit(1)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          this.liveData = this.extractData(doc.data());
+          this.userService.updateBar( this.hasIssueWithDate(doc) ? '' : this.getErrorWithDateMessage(this.selectedScale),
+            this.negative);
+        });
+      });
+  }
+  extractData(data) {
+    return {
+      weight: data.weight,
+      diff: data.diff > 0 ? '+' + data.diff : data.diff,
+      tempIn: data.tempIn,
+      humIn: data.humIn,
+      tempOut: data.tempOut,
+      humOut: data.humOut,
+      batt: data.batt,
+      signal: data.signal,
+      date: this.formatDate(data.time.toDate())
+    };
+  }
   formatDate(date: Date): string {
     let minutes: any = date.getMinutes();
     let seconds: any = date.getSeconds();
@@ -290,15 +255,59 @@ export class MonitorComponent implements OnInit {
     return day + '/' + month + '/' + date.getFullYear() + ' ' +
       '' + date.getHours() + ':' + minutes + ':' + seconds;
   }
-
-  generateUniqueNumberForDate(date: Date) {
-    return date.getFullYear() + date.getMonth() + date.getDate();
-  }
   hasIssueWithDate(doc) {
     return this.generateUniqueNumberForDate(doc.data().time.toDate()) < this.generateUniqueNumberForDate(this.getYesterdayDate());
   }
-
-  getErrorWithDateMessage(scale: string) {
-    return 'Warning! Seems like the scale(' + scale + ') didn\'t send data as expected! Resetting the scale is advised...';
+  generateUniqueNumberForDate(date: Date) {
+    return date.getFullYear() + date.getMonth() + date.getDate();
+  }
+  updateChartData() {
+    this.updateTodayWeight();
+    this.updateYesterdayWeight();
+  }
+  updateTodayWeight() {
+    this.LineChart.data.datasets[0].data = [];
+    const lastDay = new Date(Date.now()).getDate();
+    this.db.firestore.collection('scales')
+      .doc(this.aut.auth.currentUser.uid)
+      .collection(this.selectedScale)
+      .orderBy('time', 'desc')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const date = doc.data().time.toDate();
+          if (lastDay === date.getDate()) {
+            this.LineChart.data.datasets[0].data.push({t: new Date(0, 0, 0,
+                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
+            this.LineChart.update();
+          } else {
+            return true;
+          }
+        });
+      });
+  }
+  updateYesterdayWeight() {
+    this.LineChart.data.datasets[1].data = [];
+    const lastDay = this.getYesterdayDate().getDate();
+    this.db.firestore.collection('scales')
+      .doc(this.aut.auth.currentUser.uid)
+      .collection(this.selectedScale)
+      .orderBy('time', 'desc')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const date = doc.data().time.toDate();
+          if (date.getDate() === lastDay) {
+            this.LineChart.data.datasets[1].data.push({t: new Date(0, 0, 0,
+                date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()), y: doc.data().diff});
+            this.LineChart.update();
+          } else if (date.getDate() < lastDay) {
+            return true;
+          }
+        });
+      });
+  }
+  getYesterdayDate() {
+    return new Date(new Date().getDate() - 1);
   }
 }

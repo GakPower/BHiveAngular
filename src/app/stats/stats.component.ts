@@ -1,16 +1,14 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {UserService} from '../shared/user.service';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./stats.component.css']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent {
   scalesUnsubscribe;
   scales = [];
 
@@ -26,8 +24,4 @@ export class StatsComponent implements OnInit {
         this.scales = doc.data().scales.map(x => x.name);
       });
   }
-
-  ngOnInit() {
-  }
-
 }

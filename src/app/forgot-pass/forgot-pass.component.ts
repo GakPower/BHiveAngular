@@ -1,25 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Swal from 'sweetalert2';
-import {ErrorStateMatcher} from '@angular/material';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../shared/user.service';
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
 @Component({
   selector: 'app-forgot-pass',
   templateUrl: './forgot-pass.component.html',
   styleUrls: ['./forgot-pass.component.css']
 })
-export class ForgotPassComponent implements OnInit {
+export class ForgotPassComponent {
   emailForm = new FormControl('');
   emailErrorText = '';
   disabled = false;
@@ -33,27 +24,18 @@ export class ForgotPassComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
-
   onSubmit() {
     this.disabled = true;
     setTimeout(() => {
       const email = this.emailForm.value;
       if (!email) {
-        this.emailForm.setErrors({empty: true});
-        this.emailErrorText = 'The field can not be empty';
-        this.disabled = false;
+        this.setError({empty: true}, 'The field can not be empty');
       } else if (email.indexOf('@') === -1) {
-        this.emailForm.setErrors({notEmail: true});
-        this.emailErrorText = 'Wrongly formatted email';
-        this.disabled = false;
+        this.setError({notEmail: true}, 'Wrongly formatted email');
       } else {
         this.aut.auth.fetchSignInMethodsForEmail(email).then((s) => {
           if (s.length === 0) {
-            this.emailErrorText = 'There is not an account with that email';
-            this.emailForm.setErrors({accMailNotFound: true});
-            this.disabled = false;
+            this.setError({accMailNotFound: true}, 'There is not an account with that email');
           } else {
             this.aut.auth.sendPasswordResetEmail(email).then(() => {
               Swal.fire(
@@ -69,7 +51,13 @@ export class ForgotPassComponent implements OnInit {
           }
         });
       }
-    }, 1000);
+    }, 500);
+  }
+
+  setError(error, errorMessage) {
+    this.emailForm.setErrors(error);
+    this.emailErrorText = errorMessage;
+    this.disabled = false;
   }
 
 }

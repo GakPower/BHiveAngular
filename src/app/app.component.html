@@ -1,6 +1,6 @@
-<div id="errorBar" [style.top]="error ? '0' : '-60px'">
-  <p>{{error}}</p>
-  <button matRipple [matRippleColor]="'var(--negativeRipple)'" (click)="hideError()"><mat-icon>close</mat-icon></button>
+<div id="bar" [style.top]="barText ? '0' : '-60px'">
+  <p>{{barText}}</p>
+  <button matRipple [matRippleColor]="'var(--negativeRipple)'" (click)="hideBar()"><mat-icon>close</mat-icon></button>
 </div>
 <header>
   <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="320 170 160 160"><path fill="transparent" d="M-9-527h800v500H-9z"/><path fill="transparent" d="M365.875-197.726l-29.563-17.44v-29.46L311.18-259.45v-34.73l25.132-14.817v-29.838l29.56-17.44L391-341.455l25.128-14.818 29.56 17.44v29.84l25.132 14.816v34.73l-25.133 14.82v29.47l-29.56 17.435L391-212.537l-25.128 14.812zm29.57-22.514l20.684 12.19 20.664-12.19v-24.392l-20.828-12.286-20.524 12.105v24.573zm-50.243-.004l20.672 12.195 20.68-12.19v-24.57l-20.522-12.11-20.83 12.29v24.39zm75.372-44.468l20.826 12.29 20.53-12.105V-289.1l-20.683-12.194-20.674 12.194v24.388zm-100.504.185l20.523 12.104 20.83-12.292V-289.1l-20.674-12.195-20.68 12.194v24.57zm50.246-.19l20.685 12.2 20.687-12.198v-24.562L391-301.482l-20.684 12.207v24.558zm25.13-44.467l20.683 12.204 20.664-12.202v-24.575l-20.668-12.195-20.685 12.195v24.573zm-50.244.003l20.672 12.2 20.68-12.206v-24.573l-20.68-12.194-20.672 12.194v24.576zM0 0h800v500H0z"/><path fill="var(--primary)" d="M374.875 329.274l-29.564-17.44v-29.46l-25.13-14.823v-34.73l25.13-14.814v-29.838l29.56-17.44L400 185.542l25.13-14.815 29.558 17.44v29.84l25.133 14.815v34.73l-25.13 14.82v29.47l-29.56 17.435L400 314.46l-25.125 14.814zm29.57-22.514l20.684 12.19 20.664-12.19v-24.392l-20.828-12.286-20.524 12.105v24.573zm-50.244-.004l20.678 12.195 20.678-12.19v-24.57l-20.52-12.11-20.83 12.29v24.39zm75.377-44.468l20.826 12.29 20.53-12.105V237.9l-20.682-12.194-20.673 12.194v24.388zm-100.504.185l20.524 12.104 20.83-12.292V237.9l-20.674-12.195-20.68 12.194v24.57zm50.247-.19l20.683 12.2 20.685-12.198v-24.562L400 225.518l-20.684 12.207v24.558zm25.13-44.467l20.682 12.204 20.667-12.202v-24.574l-20.67-12.194-20.686 12.194v24.572zm-50.246.002l20.675 12.202 20.676-12.204v-24.572L374.88 181.05l-20.675 12.192v24.574z"/></svg>
@@ -15,19 +15,18 @@
         <p>BHive</p>
       </div>
       <div id="menuButtons">
-        <button matRipple [matRippleColor]="color">Home</button>
-        <button matRipple [matRippleColor]="color" routerLink="/monitor" *ngIf="signedIn">Monitor</button>
-        <button matRipple [matRippleColor]="color" routerLink="/stats" *ngIf="signedIn">Statistics</button>
-        <button matRipple [matRippleColor]="color" routerLink="/history" *ngIf="signedIn">History</button>
-        <button matRipple [matRippleColor]="color" (click)="scrollToBottom()">Contact us</button>
+        <button matRipple [matRippleColor]="secondaryRipple" routerLink="/monitor" *ngIf="signedIn">Monitor</button>
+        <button matRipple [matRippleColor]="secondaryRipple" routerLink="/stats" *ngIf="signedIn">Statistics</button>
+        <button matRipple [matRippleColor]="secondaryRipple" routerLink="/history" *ngIf="signedIn">History</button>
+        <button matRipple [matRippleColor]="secondaryRipple" (click)="scrollToBottom()">Contact us</button>
         <div class="menuButtonGroup" *ngIf="!signedIn">
-          <button matRipple [matRippleColor]="color" routerLink="/login">Login</button>
-          <button matRipple [matRippleColor]="color" routerLink="/register">Join</button>
+          <button matRipple [matRippleColor]="secondaryRipple" routerLink="/login">Login</button>
+          <button matRipple [matRippleColor]="secondaryRipple" routerLink="/register">Join</button>
         </div>
 
         <div class="menuButtonGroup" id="signedInGroup" *ngIf="signedIn">
-          <button matRipple [matRippleColor]="color" routerLink="/settings"><mat-icon>settings</mat-icon></button>
-          <button matRipple [matRippleColor]="color" routerLink="/profile">
+          <button matRipple [matRippleColor]="secondaryRipple" routerLink="/settings"><mat-icon>settings</mat-icon></button>
+          <button matRipple [matRippleColor]="secondaryRipple" routerLink="/profile">
             <mat-icon>person</mat-icon>
             <span style="margin-top: 2px; margin-left: 3px">Profile</span>
           </button>

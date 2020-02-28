@@ -1,32 +1,41 @@
 import { Injectable } from '@angular/core';
-import { User } from './User';
-import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import Swal from 'sweetalert2';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private db: AngularFireDatabase,
-              private aut: AngularFireAuth) { }
+  constructor() {
+  }
 
-  private signedIn = new Subject();
-  private error = new Subject();
+  private signedIn = new Subject<boolean>();
+  private barText = new Subject<string>();
+  private barColor = new Subject<string>();
 
   isSignedIn() {
     return this.signedIn;
   }
+
   updateSignIn(signedIn: boolean) {
     this.signedIn.next(signedIn);
   }
 
-  getError() {
-    return this.error;
+  getBarText() {
+      return this.barText;
   }
-  updateError(error: string) {
-    this.error.next(error);
+  getBarColor() {
+      return this.barColor;
+  }
+
+  updateBar(barText: string, barColor: string) {
+    this.barText.next(barText);
+    this.barColor.next(barColor);
+  }
+  updateBarText(barText: string) {
+    this.barText.next(barText);
+  }
+  updateBarColor(barColor: string) {
+    this.barColor.next(barColor);
   }
 }
