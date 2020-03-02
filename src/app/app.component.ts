@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
 import { UserService } from './shared/user.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {slideInAnimation} from './animations';
+import {RouterOutlet} from '@angular/router';
+import { HostListener } from '@angular/core';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -9,9 +12,12 @@ function sleep(ms) {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    slideInAnimation
+  ]
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit {
   title = 'BHive';
   fixed = false;
   animateContacts = false;
@@ -19,13 +25,11 @@ export class AppComponent {
   secondaryRipple = getComputedStyle(document.documentElement).getPropertyValue('--secondaryRipple');
   barText: unknown = '';
   barColor: unknown = '';
+  openSideBar = false;
 
   constructor(private userService: UserService,
               private aut: AngularFireAuth) {
     aut.auth.signOut();
-    setInterval(() => {
-      this.fixed = window.pageYOffset > 220;
-    }, 1);
 
     this.userService.isSignedIn().subscribe(isSigned => {
       this.signedIn = isSigned;
@@ -49,5 +53,18 @@ export class AppComponent {
 
   hideBar() {
     this.userService.updateBarText('');
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
+
+  ngAfterContentInit(): void {
+    this.onWindowScroll();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.fixed = window.pageYOffset > 220;
   }
 }

@@ -46,7 +46,7 @@ header p {
 
   clip-path: polygon(0 100%, 0 40px, 100% 0, 100% 100%);
 
-  width: calc(100vw - 17px);
+  width: 100%;
   min-height: 100vh;
   background-color: var(--primary);
 }
@@ -67,7 +67,7 @@ header p {
 
   width: fit-content;
   height: 35px;
-  margin-right: 20px;
+  margin-right: 30px;
 
   text-decoration: none;
   text-align: center;
@@ -95,16 +95,22 @@ header p {
   display: flex;
   align-items: center;
 
-  width: calc(100vw - 30px);
-  z-index: 2;
-
+  width: 100%;
+  z-index: 55;
+}
+#menuBar.closeSideBar {
   background-color: var(--primary);
+  transition: 0ms background-color 300ms ease;
+}
+#menuBar.openSideBar {
+  background-color: transparent;
 }
 
 #menuButtons {
   position: relative;
   width: inherit;
   z-index: 2;
+  opacity: 1;
 
   background-color: var(--primary);
 }
@@ -202,8 +208,7 @@ header p {
   align-items: center;
   justify-content: space-between;
 
-  width: calc(100vw - 17px);
-  height: 60px;
+  width: 100%;
   z-index: 100;
 
   background-color: var(--negative);
@@ -219,11 +224,12 @@ header p {
   font-size: 1.2rem;
 }
 #bar button {
-  margin-right: 20px;
-  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 35px;
-  height: 35px;
+  margin-right: 20px;
+  padding: 5px;
 
   background-color: var(--negative);
   border-radius: 10px;
@@ -236,7 +242,148 @@ header p {
 #bar button:hover {
   background-color: var(--negativeHover);
 }
-
 #bar button mat-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   color: var(--tertiary);
 }
+
+#hamburger {
+  align-self: flex-end;
+  width: 40px;
+  height: 30px;
+  display: none;
+  position: relative;
+  margin: 5px 25px 5px 5px;
+  cursor: pointer;
+
+  z-index: 55;
+
+  transition: 300ms opacity ease;
+}
+#hamburger span {
+  display: block;
+  position: absolute;
+  left: 0;
+  margin-right: 20px;
+
+  height: 5px;
+  width: 100%;
+
+  background: var(--secondary);
+  border-radius: 9px;
+
+  transition: 300ms ease-in-out;
+}
+#hamburger span:nth-child(1) {
+  top: 0;
+  transform-origin: left center;
+}
+#hamburger span:nth-child(2) {
+  top: 12px;
+  transform-origin: left center;
+}
+#hamburger span:nth-child(3) {
+  top: 24px;
+  transform-origin: left center;
+}
+#hamburger.openSideBar span:nth-child(1) {
+  transform: rotate(45deg);
+  top: -2px;
+  left: 6px;
+}
+#hamburger.openSideBar span:nth-child(2) {
+  width: 0;
+  opacity: 0;
+}
+#hamburger.openSideBar span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 26px;
+  left: 6px;
+}
+
+#sideBar {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  clip-path: circle(0 at 100% 0);
+
+  height: 100%;
+  width: 100%;
+
+  z-index: 52;
+
+  transition: left 300ms ease-in-out, clip-path 300ms linear;
+
+  background-color: var(--tertiary);
+}
+#sideBar.openSideBar {
+  clip-path: circle(100% at 100% 0);
+}
+#sideBar > button {
+  position: relative;
+  margin-bottom: 20px;
+
+  height: 50px;
+  min-width: 100px;
+  line-height: 50px;
+
+  color: var(--secondary);
+  font-size: 1.5rem;
+  font-family: var(--secondaryFont);
+  background: transparent;
+  border: 0;
+
+  cursor: pointer;
+  caret-color: transparent;
+
+  transition: all 500ms;
+}
+#sideBar > button:first-child {
+  margin-top: 100px;
+}
+#sideBar > button::after {
+  content: "";
+
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  height: 2px;
+  width: 0;
+
+  background: var(--secondary);
+
+  transition: width 300ms ease, left 300ms ease;
+}
+#sideBar > button:hover::after,
+#sideBar > button:focus::after {
+  width: 100%;
+  left: 0;
+}
+
+@media only screen and (max-width: 700px) {
+  #hamburger {
+    display: block;
+  }
+
+  #menuBar {
+    justify-content: space-between;
+  }
+
+  #menuButtons {
+    display: none;
+  }
+}
+@media only screen and (min-width: 700px) {
+  #sideBar.openSideBar {
+    clip-path: circle(0 at 100% 0);
+  }
+}
+

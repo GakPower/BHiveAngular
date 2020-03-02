@@ -64,4 +64,27 @@ mat-divider {
 .dataGroup div div {
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  #container {
+    width: 100%;
+  }
+  #container > p:first-child {
+    font-size: calc(5px + 1.5vw);
+  }
+  #container > p {
+    font-size: calc(5px + 1.5vw);
+  }
+  .dataGroup div svg {
+    width: calc(5px + 2.6vw);
+    min-width: calc(5px + 2.6vw);
+  }
+  .dataGroup div span {
+    font-size: calc(5px + 2.6vw);
+  }
+  .dataGroup div span:last-child {
+    font-size: calc(5px + 1.3vw);
+  }
 }

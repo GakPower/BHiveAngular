@@ -92,7 +92,6 @@ mat-icon {
 
   width: 30vw;
   min-height: 350px;
-  min-width: 400px;
 
   border: 1px solid var(--secondary);
   border-radius: 10px;
@@ -270,4 +269,13 @@ mat-icon {
 :host ::ng-deep .mat-radio-inner-circle{
   height: 20px;
   width: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  #fullContainer {
+    flex-direction: column;
+  }
+  .container {
+    width: 90%;
+  }
 }

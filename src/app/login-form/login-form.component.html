@@ -5,7 +5,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput aria-label="" type="email" [formControl]="emailForm"
-             (keyup.enter)="onSubmit()" appAutoFocus="50">
+             (keyup.enter)="onSubmit()" appAutoFocus="50" [autocomplete]="'off'">
 
       <mat-error *ngIf="emailForm.hasError('empty') ||
         emailForm.hasError('notEmail')">{{emailErrorText}}</mat-error>
@@ -13,7 +13,8 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput [type]="typePassField" [formControl]="passForm" (keyup.enter)="onSubmit()" appAutoFocus="10">
+      <input aria-label="" matInput [type]="typePassField" [formControl]="passForm"
+             (keyup.enter)="onSubmit()" appAutoFocus="10" [autocomplete]="'off'">
       <button mat-button matSuffix mat-icon-button *ngIf="passForm.value" (click)="showHide()">
         <mat-icon *ngIf="showPassField">visibility_on</mat-icon>
         <mat-icon *ngIf="!showPassField">visibility_off</mat-icon>

@@ -27,10 +27,14 @@ span:hover {
 #content {
   padding: 20px;
 
-  width: 15vw;
+  display: flex;
+  flex-direction: column;
+
+  width: calc(150px + 10vw);
 
   border: 1px solid var(--secondary);
   border-radius: 10px;
 
   text-align: center;
+  word-wrap: break-word;
 }

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100vw - 60px);
+  width: 100%;
 }
 #topStats {
   justify-content: center;
@@ -13,6 +13,7 @@
   margin-right: 10px;
   margin-top: 20px;
   text-align: center;
+  word-wrap: break-word;
 }
 #topStats > div > p {
   color: var(--tertiary);
@@ -44,7 +45,7 @@
   width: 100%;
 }
 #charts > div {
-  width: 45vw;
+  width: 45%;
   height: 45vh;
 
   border-radius: 15px;
@@ -52,4 +53,15 @@
 
   padding: 0 10px 0 10px;
   margin: 0 20px 20px 0;
+}
+
+@media only screen and (max-width: 700px) {
+  #topStats > div {
+    width: 35%;
+  }
+  #charts > div {
+    width: 90%;
+    height: 50vh;
+    margin: 0 0 20px 0;
+  }
 }

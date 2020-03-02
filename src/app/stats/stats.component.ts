@@ -11,6 +11,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 export class StatsComponent {
   scalesUnsubscribe;
   scales = [];
+  selectedIndex = 1;
 
   constructor(private db: AngularFirestore,
               private aut: AngularFireAuth,

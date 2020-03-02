@@ -8,6 +8,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {StatsComponent} from './stats/stats.component';
 import {HistoryComponent} from './history/history.component';
 import {SettingsComponent} from './settings/settings.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent, data: {animation: 'Login'} },
@@ -21,7 +23,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    BrowserModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

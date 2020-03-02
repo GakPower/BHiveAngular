@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: calc(100vw - 60px);
+  width: 100vw;
 }
 
 #history {
