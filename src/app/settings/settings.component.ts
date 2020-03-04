@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
-      .onSnapshot((doc) => {
+      .get().then((doc) => {
         this.scales = doc.data().scales.map(x => x.name);
       });
   }

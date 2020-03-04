@@ -54,7 +54,7 @@ h1 {
   align-items: center;
 }
 #forms mat-form-field {
-  width: calc(180px + 8vw);
+  width: calc(180px + 5vw);
 }
 #forms mat-form-field input {
   min-height: 30px;
@@ -126,4 +126,18 @@ h1 {
 /*!/ mat-label error style*!*/
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
   color: red !important;
+}
+
+@media only screen and (max-width: 700px) {
+  #loginForm {
+    padding: 0 40px 20px;
+  }
+  #forms mat-form-field {
+    width: calc(100px + 25vw);
+  }
+}
+@media only screen and (max-width: 300px) {
+  #loginForm {
+    padding: 0 20px 20px;
+  }
 }

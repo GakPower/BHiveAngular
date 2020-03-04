@@ -101,7 +101,7 @@ h1 {
   width: 80%;
 }
 #forms mat-form-field {
-  width: calc(180px + 8vw);
+  width: calc(180px + 5vw);
 }
 #forms mat-form-field input {
   min-height: 30px;
@@ -150,4 +150,18 @@ h1 {
 /*!/ mat-label error style*!*/
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
   color: red !important;
+}
+
+@media only screen and (max-width: 700px) {
+  #forms mat-form-field {
+     width: calc(100px + 25vw);
+  }
+}
+@media only screen and (max-width: 400px) {
+  #forgotPassForm {
+    width: calc(200px + 10vw);
+  }
+  #forms mat-form-field {
+    width: calc(100px + 25vw);
+  }
 }

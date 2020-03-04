@@ -10,3 +10,6 @@
   font-family: var(--secondaryFont);
   font-size: 1.2rem;
 }
+::ng-deep .mat-tab-labels {
+  flex-wrap: wrap;
+}

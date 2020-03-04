@@ -60,11 +60,15 @@ export class AppComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.onWindowScroll();
+    setTimeout(() => {
+      this.onWindowScroll();
+    }, 0);
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.fixed = window.pageYOffset > 220;
+    setTimeout(() => {
+      this.fixed = window.pageYOffset > 220;
+    }, 200);
   }
 }

@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 100vw;
+  width: 99vw;
 }
 
 #history {
@@ -17,7 +17,7 @@
   align-self: center;
 }
 #history > app-history-div {
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 #showMoreButton {
@@ -40,4 +40,14 @@
 #showMoreButton:hover,
 #showMoreButton:focus {
   background-color: var(--secondaryHover);
+}
+
+@media only screen and (max-width: 700px)  {
+  #history > app-history-div {
+    width: 80%;
+  }
+  #showMoreButton {
+    height: 30px;
+    font-size: calc(5px + 2.2vw);
+  }
 }

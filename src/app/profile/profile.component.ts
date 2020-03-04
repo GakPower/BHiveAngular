@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
 
   scales = [];
   loading = false;
-  scalesUnsubscribe;
 
   constructor(private aut: AngularFireAuth,
               private db: AngularFirestore,
@@ -26,9 +25,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.scalesUnsubscribe = this.db.firestore.collection('users')
+    this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
-      .onSnapshot((doc) => {
+      .get().then((doc) => {
         this.scales = doc.data().scales.map(x => x.name);
       });
   }
@@ -53,7 +52,6 @@ export class ProfileComponent implements OnInit {
   }
 
   signOut() {
-    this.scalesUnsubscribe();
     this.aut.auth.signOut();
     this.userService.updateSignIn(false);
     this.router.navigate(['login']);

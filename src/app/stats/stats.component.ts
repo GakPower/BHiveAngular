@@ -9,9 +9,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent {
-  scalesUnsubscribe;
   scales = [];
-  selectedIndex = 1;
 
   constructor(private db: AngularFirestore,
               private aut: AngularFireAuth,
@@ -19,9 +17,9 @@ export class StatsComponent {
     if (aut.auth.currentUser == null) {
       this.router.navigate(['/login']);
     }
-    this.scalesUnsubscribe = this.db.firestore.collection('users')
+    this.db.firestore.collection('users')
       .doc(this.aut.auth.currentUser.uid)
-      .onSnapshot((doc) => {
+      .get().then((doc) => {
         this.scales = doc.data().scales.map(x => x.name);
       });
   }

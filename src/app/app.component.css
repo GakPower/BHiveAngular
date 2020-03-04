@@ -58,7 +58,7 @@ header p {
   align-items: center;
   justify-content: center;
 
-  width: 100%;
+  width: 98%;
 }
 
 #smallLogo {
@@ -100,7 +100,7 @@ header p {
 }
 #menuBar.closeSideBar {
   background-color: var(--primary);
-  transition: 0ms background-color 300ms ease;
+  transition: 0ms background-color 400ms ease;
 }
 #menuBar.openSideBar {
   background-color: transparent;
@@ -178,6 +178,9 @@ header p {
 #menuButtons .menuButtonGroup button:focus {
   background: var(--secondaryHover);
 }
+#menuButtons .menuButtonGroup button:last-child {
+  margin-right: 10px;
+}
 
 #signedInGroup button {
   display: flex;
@@ -189,6 +192,9 @@ header p {
 #signedInGroup button:hover,
 #signedInGroup button:focus {
   background-color: var(--secondaryHover);
+}
+#signedInGroup button:last-child {
+  margin-right: 10px;
 }
 #signedInGroup button .mat-icon {
   width: 15px;
@@ -318,7 +324,7 @@ header p {
 
   z-index: 52;
 
-  transition: left 300ms ease-in-out, clip-path 300ms linear;
+  transition: clip-path 400ms linear;
 
   background-color: var(--tertiary);
 }
@@ -369,6 +375,10 @@ header p {
 }
 
 @media only screen and (max-width: 700px) {
+  #smallLogo {
+    margin-right: 0;
+  }
+
   #hamburger {
     display: block;
   }

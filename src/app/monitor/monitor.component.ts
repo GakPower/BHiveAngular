@@ -308,6 +308,8 @@ export class MonitorComponent implements OnInit {
       });
   }
   getYesterdayDate() {
-    return new Date(new Date().getDate() - 1);
+    const d = new Date();
+    d.setDate(d.getDate() - 1);
+    return d;
   }
 }

@@ -10,6 +10,8 @@ export class HistoryDivComponent implements OnInit {
   @Input() data: object;
   @Input() latest = true;
 
+  secondary = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
+
   date;
 
   diff = '';

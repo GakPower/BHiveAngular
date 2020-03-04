@@ -1,5 +1,5 @@
 #container {
-  width: 100%;
+  width: 98%;
   height: 100%;
 }
 
@@ -14,4 +14,16 @@
   color: var(--secondary);
   font-family: var(--secondaryFont);
   font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 700px) {
+  ::ng-deep .mat-tab-label {
+    font-size: .9rem;
+  }
+  ::ng-deep .mat-tab-label.mat-tab-label-active {
+    font-size: .9rem;
+  }
+  ::ng-deep .mat-tab-labels {
+    flex-wrap: wrap;
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from '../shared/user.service';
 import {Router} from '@angular/router';

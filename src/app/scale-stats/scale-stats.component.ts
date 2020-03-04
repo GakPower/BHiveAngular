@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Chart} from 'chart.js';
@@ -126,78 +126,113 @@ export class ScaleStatsComponent implements OnInit {
       .doc(this.aut.auth.currentUser.uid).get()
       .then((doc) => {
         this.allScales = doc.data().scales.map(x => x.name);
-        this.createCharts();
+        setTimeout(() => {
+          this.createCharts();
+        }, 0);
         if (this.scale !== 'all') {
-          this.getTopStats(this.scale);
-          this.getChartData(this.scale, 0);
+          setTimeout(() => {
+            setTimeout(() => {
+              this.getTopStats(this.scale);
+            }, 0);
+            this.getChartData(this.scale, 0);
+          }, 0);
         } else {
           this.allScales.forEach((scale) => {
-            this.getTopStats(scale);
-            this.getChartData(scale, this.allScales.indexOf(scale));
+            setTimeout(() => {
+              setTimeout(() => {
+                this.getTopStats(scale);
+              }, 0);
+              this.getChartData(scale, this.allScales.indexOf(scale));
+            }, 0);
           });
         }
       });
   }
   createCharts() {
-    this.weightChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.weightChart'),
-      'Weight'
-    );
-    this.weightDiffChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.weightDiffChart'),
-      'Weight Difference'
-    );
-    this.tempInChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.tempInChart'),
-      'Inside Temperature'
-    );
-    this.tempOutChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.tempOutChart'),
-      'Outside Temperature'
-    );
-    this.humInChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.humInChart'),
-      'Inside Humidity'
-    );
-    this.humOutChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.humOutChart'),
-      'Outside Humidity'
-    );
-    this.signalChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.signalChart'),
-      'Signal'
-    );
-    this.batteryChart = this.createLineChart(
-      this.elementRef.nativeElement.querySelector('.batteryChart'),
-      'Battery'
-    );
+    setTimeout(() => {
+      this.weightChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.weightChart'),
+        'Weight'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.weightDiffChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.weightDiffChart'),
+        'Weight Difference'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.tempInChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.tempInChart'),
+        'Inside Temperature'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.tempOutChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.tempOutChart'),
+        'Outside Temperature'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.humInChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.humInChart'),
+        'Inside Humidity'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.humOutChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.humOutChart'),
+        'Outside Humidity'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.signalChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.signalChart'),
+        'Signal'
+      );
+    }, 0);
+    setTimeout(() => {
+      this.batteryChart = this.createLineChart(
+        this.elementRef.nativeElement.querySelector('.batteryChart'),
+        'Battery'
+      );
+    }, 0);
   }
   getChartData(scale, scaleIndex) {
     this.db.firestore.collection('scales')
       .doc(this.aut.auth.currentUser.uid).collection(scale)
       .orderBy('time', 'desc')
-      .limit(31)
       .get().then((docs) => {
-      docs.forEach(doc => {
-        const data = doc.data();
-        this.weightChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.weight});
-        this.weightDiffChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.diff});
-        this.humInChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.humIn});
-        this.humOutChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.humOut});
-        this.tempInChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.tempIn});
-        this.tempOutChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.tempOut});
-        this.signalChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.signal});
-        this.batteryChart.data.datasets[scaleIndex].data.push({t: data.time.toDate(), y: data.batt});
-      });
-      this.weightChart.update();
-      this.weightDiffChart.update();
-      this.humInChart.update();
-      this.humOutChart.update();
-      this.tempInChart.update();
-      this.tempOutChart.update();
-      this.signalChart.update();
-      this.batteryChart.update();
+        const dateAMonthAgo = this.getDateAMonthAgo();
+        for (const doc of docs.docs) {
+          const data = doc.data();
+          const date = data.time.toDate();
+          if (date < dateAMonthAgo) {
+            break;
+          }
+          this.weightChart.data.datasets[scaleIndex].data.push({t: date, y: data.weight});
+          this.weightDiffChart.data.datasets[scaleIndex].data.push({t: date, y: data.diff});
+          this.humInChart.data.datasets[scaleIndex].data.push({t: date, y: data.humIn});
+          this.humOutChart.data.datasets[scaleIndex].data.push({t: date, y: data.humOut});
+          this.tempInChart.data.datasets[scaleIndex].data.push({t: date, y: data.tempIn});
+          this.tempOutChart.data.datasets[scaleIndex].data.push({t: date, y: data.tempOut});
+          this.signalChart.data.datasets[scaleIndex].data.push({t: date, y: data.signal});
+          this.batteryChart.data.datasets[scaleIndex].data.push({t: date, y: data.batt});
+        }
+        this.weightChart.update();
+        this.weightDiffChart.update();
+        this.humInChart.update();
+        this.humOutChart.update();
+        this.tempInChart.update();
+        this.tempOutChart.update();
+        this.signalChart.update();
+        this.batteryChart.update();
     });
+  }
+  getDateAMonthAgo() {
+    const d = new Date();
+    d.setDate(d.getDate() - 31);
+    return d;
   }
   getTopStats(scale) {
     const scaleData = this.db.firestore.collection('scales')
@@ -281,18 +316,22 @@ export class ScaleStatsComponent implements OnInit {
     });
   }
   updateHighTopStat(doc, stat, storage, scale) {
-    if (!storage.inited || storage.stat < stat) {
-      storage.stat = stat;
-      storage.date = this.formatDate(doc.docs[0].data().time.toDate());
-      storage.scale = scale;
-    }
+    setTimeout(() => {
+      if (!storage.inited || storage.stat < stat) {
+        storage.stat = stat;
+        storage.date = this.formatDate(doc.docs[0].data().time.toDate());
+        storage.scale = scale;
+      }
+    }, 0);
   }
   updateLowTopStat(doc, stat, storage, scale) {
-    if (!storage.inited || storage.stat > stat) {
-      storage.stat = stat;
-      storage.date = this.formatDate(doc.docs[0].data().time.toDate());
-      storage.scale = scale;
-    }
+    setTimeout(() => {
+      if (!storage.inited || storage.stat > stat) {
+        storage.stat = stat;
+        storage.date = this.formatDate(doc.docs[0].data().time.toDate());
+        storage.scale = scale;
+      }
+    }, 0);
   }
 
   getRandomColor() {
@@ -351,6 +390,18 @@ export class ScaleStatsComponent implements OnInit {
         datasets
       },
       options: {
+        animation: {
+          duration: 0
+        },
+        hover: {
+          animationDuration: 0
+        },
+        responsiveAnimationDuration: 0,
+        elements: {
+          line: {
+            tension: 0
+          }
+        },
         tooltips: {
           mode: 'nearest',
           titleFontSize: 15,
@@ -421,7 +472,8 @@ export class ScaleStatsComponent implements OnInit {
               beginAtZero: true,
               fontColor: this.tertiary,
               fontFamily: this.secondaryFont,
-              fontSize: 13
+              fontSize: 13,
+              sampleSize: 65
             }
           }]
         }

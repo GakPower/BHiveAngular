@@ -8,6 +8,8 @@ mat-divider {
   display: flex;
   flex-direction: column;
 
+  margin-right: 10px;
+
   width: 25vw;
 
   border: 1px solid var(--secondaryRipple);
@@ -70,6 +72,7 @@ mat-divider {
 @media only screen and (max-width: 700px) {
   #container {
     width: 100%;
+    margin-right: 0;
   }
   #container > p:first-child {
     font-size: calc(5px + 1.5vw);
@@ -78,13 +81,13 @@ mat-divider {
     font-size: calc(5px + 1.5vw);
   }
   .dataGroup div svg {
-    width: calc(5px + 2.6vw);
-    min-width: calc(5px + 2.6vw);
+    width: calc(5px + 3.4vw);
+    min-width: calc(5px + 3.4vw);
   }
   .dataGroup div span {
-    font-size: calc(5px + 2.6vw);
+    font-size: calc(5px + 3.4vw);
   }
   .dataGroup div span:last-child {
-    font-size: calc(5px + 1.3vw);
+    font-size: calc(5px + 1.7vw);
   }
 }

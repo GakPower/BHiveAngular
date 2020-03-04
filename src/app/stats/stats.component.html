@@ -1,5 +1,5 @@
 <div id="container">
-  <mat-tab-group dynamicHeight mat-align-tabs="center" id="tabGroup">
+  <mat-tab-group dynamicHeight mat-align-tabs="center">
     <mat-tab *ngFor="let scale of scales" [label]="scale">
       <ng-template matTabContent>
         <app-scale-stats scale="{{scale}}"></app-scale-stats>
