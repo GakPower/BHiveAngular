@@ -4,7 +4,9 @@ By using BHive website you can monitor live data send from the IoT scale alogn w
 
 # Test
 If you want to test and navigate through BHive just use the credentials below:
+
 Email: test@gmail.com
+
 Password: testtest
 
 ## Tools Used
