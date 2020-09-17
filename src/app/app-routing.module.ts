@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'stats', component: StatsComponent, data: {animation: 'Stats'} },
   { path: 'history', component: HistoryComponent, data: {animation: 'History'} },
   { path: 'settings', component: SettingsComponent, data: {animation: 'Settings'} },
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
