@@ -5,23 +5,43 @@ h1 {
   color: var(--secondary);
   font-family: var(--primaryFont);
 }
-p {
-  color: var(--tertiary);
+@keyframes fromRightFade {
+  from {
+    opacity: 0;
+    right: 0;
+  }
+  to {
+    opacity: 1;
+    right: 40px;
+  }
+}
+
+#loginTest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 30px;
+  padding: 20px;
+
+  color: var(--tertiaryHighlight);
+  border: 1px solid var(--secondaryHighlight);
+  border-radius: 15px;
+
+  opacity: 0;
+  animation-name: fromRightFade;
+  animation-delay: 1000ms;
+  animation-duration: 200ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+#loginTest p {
+  margin: 0;
   font-family: var(--secondaryFont);
-  font-size: 1.1rem;
 }
-span {
+#loginTest span {
   color: var(--secondary);
-  text-decoration: none;
-  cursor: pointer;
-  user-select: text;
-}
-span::selection {
-  background-color: var(--tertiaryHighlight);
-}
-span:hover {
-  text-decoration-color: var(--secondary);
-  text-decoration: underline;
 }
 
 #content {
@@ -37,4 +57,30 @@ span:hover {
 
   text-align: center;
   word-wrap: break-word;
+}
+#content p {
+  color: var(--tertiary);
+  font-family: var(--secondaryFont);
+  font-size: 1.1rem;
+}
+#content span {
+  color: var(--secondary);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: text;
+}
+#content span::selection {
+  background-color: var(--tertiaryHighlight);
+}
+#content span:hover {
+  text-decoration-color: var(--secondary);
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 900px) {
+  #loginTest {
+    position: absolute;
+    right: 0;
+    top: 15vh;
+  }
 }
