@@ -4,10 +4,8 @@ By using BHive website you can monitor live data send from the IoT scale alogn w
 
 ## Tools Used
 
-Angular
+Angular CLI
+
 Firebase
-HTML
-CSS
-Typescript
 
 These are some of the tools used to build the website
