@@ -8,6 +8,7 @@
   --secondaryHighlight: rgba(255, 172, 29, 0.45);
   --secondaryDisabled: #5f574d;
   --tertiary: #F8F5F0;
+  --tertiaryRipple: rgba(248, 245, 240, 0.5);
   --tertiaryHighlight: rgba(248, 245, 240, 0.25);
   --positive: #3d8900;
   --negative: #c53200;
@@ -249,10 +250,6 @@ header p {
   background-color: var(--negativeHover);
 }
 #bar button mat-icon {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  min-height: 30px;
   color: var(--tertiary);
 }
 
