@@ -1,3 +1,8 @@
+h1 {
+  color: var(--secondary);
+  user-select: none;
+  font-family: var(--primaryFont);
+}
 mat-divider {
   display: block;
   margin: 0;
@@ -7,87 +12,138 @@ mat-divider {
 #container {
   display: flex;
   flex-direction: column;
-
-  margin-right: 10px;
-
-  width: 25vw;
-
-  border: 1px solid var(--secondaryRipple);
-  border-radius: 10px;
-  background-color: var(--primary);
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
 }
-#container > p:first-child {
+
+#liveData {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+
+  color: var(--secondary);
+  border-radius: 10px;
+  border: 1px solid var(--secondary);
+}
+#liveDate {
+  display: flex;
+  align-self: flex-end;
+}
+#liveDate > p {
   padding: 0;
   margin: 5px 5px 0 0;
 
   color: var(--tertiary);
   font-family: var(--secondaryFont);
   font-size: calc(5px + .6vw);
-
-  align-self: flex-end;
 }
-#container > p {
-  padding: 0;
-  margin: 0 5px 0 0;
+#monitorData {
+  margin: 0;
 
-  color: var(--secondary);
-  font-family: var(--secondaryFont);
-  font-size: calc(5px + .6vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  align-self: flex-end;
+  width: 95vw;
+
+  text-align: center;
 }
 
 .dataGroup {
-  color: var(--secondary);
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .dataGroup div {
-  height: 100%;
   width: 80%;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 .dataGroup div svg {
-  width: calc(5px + 1.2vw);
-  min-width: calc(5px + 1.2vw);
+  width: calc(5px + 1.6vw);
+  min-width: calc(5px + 1.6vw);
   margin-left: 5px;
 
   fill: var(--secondary);
 }
 .dataGroup div span {
-  font-size: calc(5px + 1.2vw);
+  font-size: calc(5px + 1.6vw);
   font-family: var(--secondaryFont);
 }
 .dataGroup div span:last-child {
-  font-size: calc(5px + .6vw);
+  font-size: calc(5px + .8vw);
 }
 .dataGroup div div {
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 
 @media only screen and (max-width: 700px) {
-  #container {
-    width: 100%;
-    margin-right: 0;
+  #selectRec mat-form-field {
+    width: 60vw;
   }
-  #container > p:first-child {
-    font-size: calc(5px + 1.5vw);
+
+  #liveData {
+    width: 80vw;
   }
-  #container > p {
-    font-size: calc(5px + 1.5vw);
+  #liveDate > p {
+    font-size: calc(5px + 1.8vw);
   }
+  #monitorData {
+    flex-direction: column;
+  }
+  #lineChartContainer {
+    width: 90vw !important;
+    height: 45vh !important;
+    margin-left: 0;
+    margin-top: 10px;
+    padding-right: 0;
+  }
+
   .dataGroup div svg {
-    width: calc(5px + 3.4vw);
-    min-width: calc(5px + 3.4vw);
+    width: calc(5px + 3.6vw);
+    min-width: calc(5px + 3.6vw);
   }
   .dataGroup div span {
-    font-size: calc(5px + 3.4vw);
+    font-size: calc(5px + 3.6vw);
   }
   .dataGroup div span:last-child {
-    font-size: calc(5px + 1.7vw);
+    font-size: calc(5px + 1.8vw);
   }
+}
+
+::ng-deep .mat-form-field-label {
+  color: var(--tertiary) !important;
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--secondary);
+}
+::ng-deep .mat-form-field-underline {
+  background-color: var(--secondary) !important;
+  opacity: .7;
+}
+::ng-deep .mat-form-field-ripple {
+  background-color: var(--secondary) !important;
+  opacity: 1;
+}
+::ng-deep .mat-select-arrow {
+  color: var(--tertiary) !important;
+}
+:host ::ng-deep .mat-select-value-text {
+  color: var(--tertiary) !important;
+}
+::ng-deep .mat-select-panel {
+  background-color: var(--secondary) !important;
+}
+::ng-deep .mat-option {
+  color: var(--primary) !important;
+}
+::ng-deep .mat-option.mat-selected {
+  filter: brightness(85%);
 }
